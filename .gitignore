@@ -1,0 +1,23 @@
+# Ignore everything
+*
+
+# But descend into folders
+!*/
+
+# Files to include
+!.travis.yml
+!*.yaml
+!.gitignore
+!*.md
+
+# yaml to explicitly ignore
+secrets.yaml
+known_devices.yaml
+
+# Ignore folders
+.storage
+.cloud
+.google.token
+
+# Folders to include
+!/tensorflow/**

@@ -1,0 +1,16 @@
+- alias: Arm daytime
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: input_boolean.arm_daytime
+      to: 'on'
+  condition:
+    condition: state
+    entity_id: input_boolean.guest
+    state: 'off'
+  action:
+    - service: script.turn_on
+      entity_id: script.arm_daytime
+    - delay: '00:00:05'
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.arm_daytime

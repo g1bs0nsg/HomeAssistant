@@ -1,0 +1,357 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret latitude
+  longitude: !secret longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: imperial
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret time_zone
+  # Customization file
+  customize: !include customize.yaml
+  # External Directories Hass is allowed to access
+  whitelist_external_dirs:
+    - /tmp
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+# Enables System Health
+system_health:
+
+http:
+  # Secrets are defined in the file secrets.yaml
+  # api_password: !secret http_password
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+  ignore:
+    - igd
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Workday/Holiday
+binary_sensor:
+  - platform: workday
+    country: US
+    workdays: [mon, tue, wed, thu, fri]
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+
+# Includes
+cloud: !include cloud.yaml
+sensor: !include sensor.yaml
+group: !include groups.yaml
+automation: !include_dir_merge_list automations/
+script: !include_dir_merge_named scripts/
+scene: !include scenes.yaml
+switch: !include switch.yaml
+image_processing: !include image_processing.yaml
+
+zone:
+  - name: Work
+    latitude: !secret worklatitude
+    longitude: !secret worklongitude
+    icon: mdi:briefcase
+  
+recorder:
+  purge_keep_days: 367
+  db_url: !secret db_url
+
+# User Customizations
+
+# Wemo Switches
+wemo:
+  static:
+    - 192.168.0.31
+
+# TPLink
+tplink:
+  discovery: false
+  switch:
+    - host: 192.168.1.177
+
+# Harmony Remote - Living Room
+remote:
+  - platform: harmony
+    name: Living Room
+    activity: TV
+    
+# Kodi
+media_player:
+  - platform: kodi
+    host: 192.168.0.86
+    port: 80
+    name: Kodi
+    enable_websocket: true
+
+# ZoneMinder
+zoneminder:
+  host: !secret zhost
+  path_zms: /cgi-bin-zm/nph-zms
+  ssl: False
+  verify_ssl: False
+
+# Cameras
+camera:
+  - platform: zoneminder
+
+# ZWave
+zwave:
+  usb_path: /dev/ttyACM0
+  network_key: !secret secure_key
+
+# Device Tracking
+owntracks:
+  max_gps_accuracy: 200
+  waypoints: True
+  mqtt_topic: "owntracks/#"
+  region_mapping:
+    home: home
+
+device_tracker:
+  - platform: unifi
+    host: !secret uhost
+    username: !secret unifiuser
+    password: !secret unifipass
+    verify_ssl: false
+    ssid_filter:
+      - !secret ssid
+
+# Person Tracking
+person:
+  - name: !secret person1
+    id: !secret person1id
+    device_trackers:
+      - !secret person1device1
+      - !secret person1device2
+  - name: !secret person2
+    id: !secret person2id
+    device_trackers:
+      - !secret person2device1
+      - !secret person2device2
+
+# MQTT
+mqtt:
+  broker: !secret broker
+  port: 8883
+  username: !secret mquser
+  password: !secret mqpass
+  certificate: auto
+  discovery: true
+  discovery_prefix: homeassistant
+
+# Telegram Configuration
+telegram_bot:
+  - platform: polling
+    api_key: !secret tapikey
+    allowed_chat_ids:
+      - !secret tchatid1
+
+# Notifications
+notify:
+  - name: !secret bot1
+    platform: telegram
+    chat_id: !secret tchatid1
+
+# Calendar
+google:
+  client_id: !secret gc_client_id
+  client_secret: !secret gc_client_secret
+
+# IFTTT
+ifttt:
+  key: !secret iftttkey
+
+# Timers
+timer:
+  dehydrator:
+  front_door_battery:
+  cimzia:
+  trash:
+
+# Input Selects
+input_select:
+  living_room_tv:
+    name: Living Room TV
+    options:
+      - Select Activity
+      - Power Off
+      - Cable TV
+      - Smart TV
+      - Netflix
+      - PS3
+      - Nintendo
+    initial: Select Activity
+    icon: mdi:monitor
+
+# Input boolean
+input_boolean:
+  bedtime:
+    name: bedtime
+    initial: off
+  arm_daytime:
+    name: Daytime
+    initial: off
+  guest:
+    name: Guest Mode
+    initial: off
+  door_open:
+    name: Door Open
+    initial: off
+  autolock:
+    name: Front Door Autolock
+    initial: on
+
+# Nest Platform
+nest:
+  client_id: !secret n_client_id
+  client_secret: !secret n_client_secret
+
+# Front Flood Lights
+light:
+  - platform: mqtt
+    name: "Front Flood Lights"
+    state_topic: "stat/front_flood/POWER"
+    command_topic: "cmnd/front_flood/POWER"
+    availability_topic: "tele/front_flood/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+# Front Porch Light
+  - platform: mqtt
+    name: "Front Porch Light"
+    state_topic: "stat/front_porch/POWER"
+    command_topic: "cmnd/front_porch/POWER"
+    availability_topic: "tele/front_porch/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false 
+# Back Flood Lights
+  - platform: mqtt
+    name: "Back Flood Lights"
+    state_topic: "stat/back_flood/POWER"
+    command_topic: "cmnd/back_flood/POWER"
+    availability_topic: "tele/back_flood/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+# Back Porch Light
+  - platform: mqtt
+    name: "Back Porch Light"
+    state_topic: "stat/back_porch/POWER"
+    command_topic: "cmnd/back_porch/POWER"
+    availability_topic: "tele/back_porch/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
+
+# Alarm Envisalink
+envisalink:
+  host: !secret enhost
+  panel_type: DSC
+  user_name: !secret enuser
+  password: !secret enpass
+  code: !secret encode
+  port: 4025
+  evl_version: 4
+  keepalive_interval: 60
+  zonedump_interval: 30
+  panic_type: Police
+  partitions: 
+    01:
+      name: 'Home' 
+  zones:
+    01:
+      name: 'Front Door'
+      type: 'door'
+    02:
+      name: 'Back Door'
+      type: 'door'
+    03:
+      name: 'Garage Door'
+      type: 'door'
+    04:
+      name: 'Living Room Motion'
+      type: 'motion'
+    05:
+      name: 'Study Window 1'
+      type: 'window'
+    06:
+      name: 'Study Window 2'
+      type: 'window'
+    07:
+      name: 'Dining Room Window 1'
+      type: 'window'
+    08:
+      name: 'Dining Room Window 2'
+      type: 'window'
+    09:
+      name: 'Dining Room Window 3'
+      type: 'window'
+    10:
+      name: 'Back Door Window'
+      type: 'window'
+    11:
+      name: 'Work Room Window'
+      type: 'window'
+    12:
+      name: 'Guest Room Window'
+      type: 'window'
+    13:
+      name: 'Master Bedroom Window 1'
+      type: 'window'
+    14:
+      name: 'Master Bedroom Window 2'
+      type: 'window'
+    15:
+      name: 'Master Bathroom Window'
+      type: 'window'

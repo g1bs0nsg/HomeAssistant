@@ -1,0 +1,31 @@
+# Turn off the Night Light after motion
+
+- id: Nightlight_Off_Motion
+  alias: Nightlight Off - Motion
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.living_room_motion
+    to: 'off'
+    for:
+      minutes: 15
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '06:00:00'
+        before: '10:00:00'
+      - condition: state
+        entity_id: input_boolean.guest
+        state: 'off'
+      - condition: state
+        entity_id: !secret personentity1
+        state: 'not_home'
+  action:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.hallway
+        - light.front_entry
+        - light.back_entry
+        - light.kitchen

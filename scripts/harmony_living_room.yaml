@@ -1,0 +1,57 @@
+tv:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "33715859"
+tvoff:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "-1"
+smarttv:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "33715861"
+ps3:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "33715860"
+netflix:
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "33715861"
+    - delay:
+        seconds: 30
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room
+        device: 54812781
+        command: Netflix
+volumeup:
+  alias: Volume Up
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room
+        device: 54812784
+        command: VolumeUp
+        num_repeats: 2
+        delay_secs: 0.25
+volumedown:
+  alias: Volume Down
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room
+        device: 54812784
+        command: VolumeDown
+        num_repeats: 2
+        delay_secs: 0.25

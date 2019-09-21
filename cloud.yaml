@@ -1,0 +1,49 @@
+google_actions:
+  filter:
+    include_entities:
+      - input_boolean.arm_daytime
+      - input_boolean.bedtime
+      - light.back_entry
+      - light.back_flood_lights
+      - light.back_porch_light
+      - light.front_entry
+      - light.front_flood_lights
+      - light.front_porch_light
+      - light.hallway
+      - light.kitchen
+      - switch.dust_collector
+  entity_config:
+    light.back_entry:
+      name: back entry
+      room: back entry
+    light.back_flood_lights:
+      name: back flood lights
+      room: exterior lights
+    light.back_porch_light:
+      name: back porch light
+      room: exterior lights
+    light.front_entry:
+      name: front entry
+      room: front entry
+    light.front_flood_lights:
+      name: front flood lights
+      room: exterior lights
+    light.front_porch_light:
+      name: front porch light
+      room: exterior lights
+    light.kitchen:
+      name: kitchen
+      room: kitchen
+    light.hallway:
+      name: hallway
+      room: hallway
+    input_boolean.arm_daytime:
+      name: Arm Daytime
+      room: living room
+    input_boolean.bedtime:
+      name: bedtime
+      room: living room
+    switch.dust_collector:
+      name: dust collector
+      room: garage
+

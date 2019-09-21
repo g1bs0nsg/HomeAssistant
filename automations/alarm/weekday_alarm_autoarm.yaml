@@ -1,0 +1,25 @@
+- id: weekday_alarm_autoarm
+  alias: Weekday Alarm Autoarm
+  initial_state: on
+  trigger:
+    platform: template
+    value_template: >
+      {{ is_state('binary_sensor.front_door', 'off') and
+         is_state('lock.front_door', 'locked') and
+         (now() - states.binary_sensor.front_door.last_changed).total_seconds() < 60 and 
+         (now() - states.lock.front_door.last_changed).total_seconds() < 60 }}
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: time
+        after: '07:00:00'
+        before: '08:00:00'
+      - condition: state
+        entity_id: input_boolean.guest
+        state: 'off'
+  action:
+    - service: alarm_control_panel.alarm_arm_home
+      entity_id: alarm_control_panel.home

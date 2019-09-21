@@ -1,0 +1,6 @@
+- name: lights_on_sunset
+  entities:
+    light.kitchen:
+      state: on
+      brightness_pct: 50
+      transition: 900

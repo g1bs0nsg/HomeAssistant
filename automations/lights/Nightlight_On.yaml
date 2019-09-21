@@ -1,0 +1,28 @@
+- id: Nightlights On
+  initial_state: on
+  alias: Nightlights On
+  trigger:
+    platform: state
+    entity_id: binary_sensor.living_room_motion
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '06:00:00'
+        before: '10:00:00'
+      - condition: state
+        entity_id: input_boolean.guest
+        state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id:
+          - light.front_entry
+          - light.back_entry
+          - light.hallway
+        brightness_pct: 1
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen
+        brightness_pct: 100

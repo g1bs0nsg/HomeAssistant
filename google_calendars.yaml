@@ -1,0 +1,35 @@
+
+- cal_id: !secret gc_cal_id
+  entities:
+  - device_id: gc_device_id
+    ignore_availability: true
+    name: Calendar
+    track: true
+
+  - device_id: cimzia
+    ignore_availability: true
+    name: Cimzia
+    track: true
+    search: "Cimzia"
+    offset: "!!"
+
+  - device_id: trash
+    ignore_availability: true
+    name: Trash
+    track: true
+    search: "trash"
+    offset: "!!"
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: contacts
+    ignore_availability: true
+    name: Contacts
+    track: true
+
+- cal_id: en.usa#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_united_states
+    ignore_availability: true
+    name: Holidays in United States
+    track: true

@@ -1,0 +1,47 @@
+light.hue_white_lamp_2:
+  hidden: true
+light.hue_white_lamp_3:
+  hidden: true
+media_player.chrome:
+  friendly_name: Google Home - LR
+zwave.aeotec_zw090_zstick_gen5_us:
+  hidden: true
+sensor.weather_cloudiness:
+  friendly_name: Cloudy
+sensor.weather_dewpoint_temperature:
+  friendly_name: Dewpoint
+sensor.weather_humidity:
+  friendly_name: Humidity
+sensor.weather_temperature:
+  friendly_name: Temp
+sensor.weather_wind_speed:
+  friendly_name: Wind
+timer.dehydrator:
+  friendly_name: Time Remaining
+script.bedtime:
+  icon: mdi:hotel
+  friendly_name: Bedtime
+sensor.hallway_thermostat_hvac_state:
+  friendly_name: Status
+sensor.hallway_thermostat_operation_mode:
+  friendly_name: Mode
+binary_sensor.hallway_thermostat_fan:
+  friendly_name: Fan
+binary_sensor.hallway_thermostat_online:
+  friendly_name: Connection Status
+sensor.hallway_thermostat_humidity:
+  friendly_name: Humidity
+binary_sensor.hallway_thermostat_has_leaf:
+  friendly_name: Energy Savings
+input_boolean.guest:
+  icon: mdi:account-clock
+input_boolean.autolock:
+  icon: mdi:lock-clock
+sensor.front_porch:
+  icon: mdi:cctv
+script.volumeup:
+  icon: mdi:volume-high
+script.volumedown:
+  icon: mdi:volume-low
+switch.tp_link_smart_plug_d7bb:
+  friendly_name: Dust Collector

@@ -1,0 +1,22 @@
+# Turn off the Night Light at sunrise
+
+- id: Nightlight_Off_Sunrise
+  alias: Nightlight Off - Sunrise
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '+00:45:00'
+  condition: 
+    - condition: state
+      entity_id: input_boolean.guest
+      state: 'off'
+  action:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.hallway
+        - light.front_entry
+        - light.back_entry
+        - light.kitchen
+        - light.front_porch_light

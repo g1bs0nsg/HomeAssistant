@@ -1,0 +1,30 @@
+- id: door_unlock
+  alias: Front Door Unlock
+  initial_state: on
+  trigger:
+    - platform: template
+      value_template: >
+        {{ is_state('person.britt', 'home') and
+           is_state('sensor.front_porch', 'on') and
+           states('image_processing.tensorflow_front_porch') | float > 0 and
+           (now() - states.person.britt.last_changed).total_seconds() < 600 and 
+           (now() - states.sensor.front_porch.last_changed).total_seconds() < 600 }}
+    - platform: template
+      value_template: >
+        {{ is_state('person.candace', 'home') and
+           is_state('sensor.front_porch', 'on') and
+           states('image_processing.tensorflow_front_porch') | float > 0 and
+           (now() - states.person.candace.last_changed).total_seconds() < 600 and
+           (now() - states.sensor.front_porch.last_changed).total_seconds() < 600 }}
+  action:
+    - service: lock.unlock
+      entity_id: lock.front_door
+    - service: !secret telservice
+      data_template:
+        message: >
+          {% if (now() - states.person.candace.last_changed).total_seconds() < 600 %}
+           Geofence has automatically unlocked the front door for Candace.
+          {% elif (now() - states.person.britt.last_changed).total_seconds() < 600 %}
+           Geofence has automatically unlocked the front door for Britt.
+          {% endif %}
+

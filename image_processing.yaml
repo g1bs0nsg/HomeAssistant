@@ -1,0 +1,13 @@
+##########################################################
+## Tensorflow
+##########################################################
+- platform: tensorflow
+  scan_interval: 604800
+  source:
+    - entity_id: camera.front_porch
+  file_out:
+    - "/tmp/{{ camera_entity.split('.')[1] }}.jpg"
+  model:
+    graph: /home/homeassistant/.homeassistant/tensorflow/frozen_inference_graph.pb
+    categories: 
+      - person
