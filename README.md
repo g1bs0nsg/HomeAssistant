@@ -6,11 +6,11 @@ A collection of [Home Assistant](https://home-assistant.io/) configuration files
 
 I am an IT Systems Engineer in my daily life, so if this setup seems like overkill, that's because it is.
 
-#Hardware:
+# Hardware:
 
 Whitebox server with AMD FX-8300 8 core Processor, 32 GB of RAM, 4 TB Raid Array
 
-#Software:
+# Software:
 
 Server is running [Proxmox VE](https://www.proxmox.com/en/proxmox-ve) Hypervisor
 
