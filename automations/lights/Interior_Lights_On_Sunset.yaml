@@ -1,0 +1,29 @@
+# Turn on kitchen light at sunset
+# and trasition up to 50% brightness over 15 minutes
+
+- id: Interior_Lights_On_Sunset
+  alias: Interior Lights On - Sunset
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "-00:45:00"
+    - platform: state
+      entity_id: group.all_devices
+      from: 'not_home'
+      to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: sun
+        after: sunset
+        after_offset: "-00:45:00"
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+      - condition: state
+        entity_id: input_boolean.guest
+        state: 'off'
+  action:
+    service: scene.turn_on
+    entity_id: scene.lights_on_sunset

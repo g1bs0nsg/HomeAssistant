@@ -1,0 +1,31 @@
+- id: input_select_harmony_living_room
+  alias: "Start Activity from Input Select"
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: input_select.living_room_tv
+    from: 'Select Activity'
+  action:
+    - service_template: >
+        {% if is_state('input_select.living_room_tv', 'Netflix') %}
+          script.netflix
+        {% else %}
+          remote.turn_on
+        {% endif %}
+      data_template:
+        entity_id: remote.living_room
+        activity: >
+          {% if is_state('input_select.living_room_tv', 'Power Off') %}
+            PowerOff
+          {% elif is_state('input_select.living_room_tv', 'Cable TV') %} 
+            TV
+          {% elif is_state('input_select.living_room_tv', 'Smart TV') %}
+            Watch Smart TV
+          {% elif is_state('input_select.living_room_tv', 'PS3') %}
+            PS3
+          {% else %}
+          {% endif %}
+    - service: input_select.select_option
+      entity_id: input_select.living_room_tv
+      data_template:
+        option: 'Select Activity' 

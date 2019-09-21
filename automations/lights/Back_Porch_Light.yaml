@@ -1,0 +1,19 @@
+# Turn on back porch light after sunset
+# whever the back door is opened and turn off
+# 30 minutes later
+
+- id: Back_Porch_Light
+  alias: Back Porch Light
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.back_door
+    from: 'off'
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: script.back_porch_light_on

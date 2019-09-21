@@ -1,0 +1,19 @@
+- id: nobody_home
+  alias: House Idle
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.presence
+    to: 'not_home'
+    for:
+      minutes: 30
+  condition:
+    condition: state
+    entity_id: input_boolean.guest
+    state: 'off'
+  action:
+    - service: homeassistant.turn_off
+      data:
+        entity_id: 
+          - remote.living_room
+          - group.interior_switches

@@ -1,0 +1,14 @@
+- id: reset_front_porch_motion
+  alias: Reset Front Porch Motion Alert
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: sensor.front_porch
+    to: 'on'
+  action:
+    - delay: '00:01:00'
+    - service: mqtt.publish
+      data:
+        topic: 'zoneminder/4'
+        payload: '{"state":"noalarm"}'
+
