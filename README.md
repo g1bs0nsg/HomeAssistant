@@ -28,4 +28,4 @@ Server is home to:
 * [Mosquitto MQTT](https://mosquitto.org/)
 * [Home Assistant](https://home-assistant.io/)
 
-Currently running [Home Assistant](https://home-assistant.io/) version __0.96.5__
+Currently running [Home Assistant](https://home-assistant.io/) version __0.99.2__
