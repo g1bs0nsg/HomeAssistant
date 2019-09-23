@@ -15,8 +15,8 @@
         entity_id: binary_sensor.workday_sensor
         state: 'on'
       - condition: time
-        after: '07:00:00'
-        before: '08:00:00'
+        after: '08:00:00'
+        before: '09:00:00'
       - condition: state
         entity_id: input_boolean.guest
         state: 'off'
