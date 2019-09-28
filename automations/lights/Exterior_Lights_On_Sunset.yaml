@@ -1,5 +1,5 @@
 # Turn on kitchen light at sunset
-# and trasition up to 50% brightness over 15 minutes
+# and transition up to 50% brightness over 15 minutes
 
 - id: Exterior_Lights_On_Sunset
   alias: Exterior Lights On - Sunset
@@ -9,27 +9,8 @@
       event: sunset
   condition:
     condition: state
-    entity_id: group.all_devices
+    entity_id: group.presence
     state: 'home'
   action:
     service: light.turn_on
     entity_id: light.front_porch_light
-
-- id: Front_Flood_On_Arrive_Home
-  alias: Front Flood Lights On When Arriving Home
-  initial_state: on
-  trigger:
-    - platform: state
-      entity_id: device_tracker.gibsonsg_britt_2, device_tracker.cdace8_candace_2
-      from: not_home
-      to: home
-  condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'below_horizion'
-  action:
-    - service: light.turn_on
-      entity_id: light.front_flood_lights
-    - delay: '00:05:00'
-    - service: light.turn_off
-      entity_id: light.front_flood_lights

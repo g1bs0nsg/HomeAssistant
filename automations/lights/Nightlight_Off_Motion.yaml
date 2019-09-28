@@ -18,9 +18,8 @@
       - condition: state
         entity_id: input_boolean.guest
         state: 'off'
-      - condition: state
-        entity_id: !secret personentity1
-        state: 'not_home'
+      - condition: template
+        value_template: "{{ not is_state('person.britt','home') }}"
   action:
     service: light.turn_off
     data:
