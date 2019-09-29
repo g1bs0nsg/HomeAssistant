@@ -20,6 +20,13 @@
     search: "trash"
     offset: "!!"
 
+  - device_id: dogs
+    ignore_availability: true
+    name: Dogs
+    track: true
+    search: "Heartworm"
+    offset: "!!"
+
 - cal_id: addressbook#contacts@group.v.calendar.google.com
   entities:
   - device_id: contacts

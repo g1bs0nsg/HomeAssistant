@@ -20,3 +20,17 @@
         - light.back_entry
         - light.kitchen
         - light.front_porch_light
+
+- id: Nightlight_Off_Time
+  alias: Nightlight Off - Time
+  initial_state: on
+  trigger:
+    platform: time
+    at: "10:00:00"
+  action:
+    service: light.turn_off
+    data:
+      entity_id:
+        - light.hallway
+        - light.front_entry
+        - light.back_entry
