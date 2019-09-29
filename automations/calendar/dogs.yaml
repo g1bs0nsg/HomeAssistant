@@ -1,0 +1,87 @@
+# Triggers on google calendar event to give dogs medicine
+- id: dogs_give_heatworm_flea_tick
+  alias: Dogs - Give Heartworm/Flea/Tick
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: calendar.dogs
+    to: 'on'
+  action: 
+    - service: !secret telservice
+      data_template:
+        message: "Did you give the dogs their medicine?"
+        data:
+          inline_keyboard: 'Yes:/dogsoff,Remind Me Later:/dogslater'
+    - service: timer.start
+      data:
+        entity_id: timer.dogs
+        duration: '00:30:00'
+
+# Handle the telegram response for yes
+- id: dogs_off
+  alias: Dogs - Gave Heartworm/Flea/Tick
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/dogsoff'
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: '{{ trigger.event.data.id }}'
+        message: 'Ok, Dog reminder acknowledged'
+    - service: telegram_bot.edit_replymarkup
+      data_template:
+        message_id: '{{ trigger.event.data.message.message_id }}'
+        chat_id: '{{ trigger.event.data.user_id }}'
+        inline_keyboard: []
+    - service: timer.cancel
+      entity_id: timer.dogs
+
+# Handle the telegram response for remind me later
+- id: dogs_remind_me_later
+  alias: Dogs - Remind Me Later
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: telegram_callback
+    event_data:
+      data: '/dogslater'
+  action:
+    - service: telegram_bot.answer_callback_query
+      data_template:
+        callback_query_id: '{{ trigger.event.data.id }}'
+        message: 'Ok, I will remind you again in 30 minutes.'
+    - service: telegram_bot.edit_replymarkup
+      data_template:
+        message_id: '{{ trigger.event.data.message.message_id }}'
+        chat_id: '{{ trigger.event.data.user_id }}'
+        inline_keyboard: []
+    - service: timer.cancel
+      entity_id: timer.dogs
+    - service: timer.start
+      data:        
+        entity_id: timer.dogs
+        duration: '00:30:00'
+
+
+# Fire the notification again if the timer finishes
+- id: dogs_repeat_reminder
+  alias: Dogs - Repeat Reminder
+  initial_state: on
+  trigger:
+    platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.dogs
+  action:
+    - service: !secret telservice
+      data_template:
+        message: "Did you give the Dogs their medicine?"
+        data:
+            inline_keyboard: 'Yes:/dogsoff,Remind Me Later:/dogslater'
+    - service: timer.start
+      data:
+        entity_id: timer.dogs
+        duration: '00:30:00'

@@ -11,3 +11,5 @@
     graph: /home/homeassistant/.homeassistant/tensorflow/frozen_inference_graph.pb
     categories: 
       - person
+    area:
+      left: 0.3

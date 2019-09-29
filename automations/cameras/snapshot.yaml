@@ -60,6 +60,23 @@
     platform: state
     entity_id: image_processing.tensorflow_front_porch
     from: '0'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.guest
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.doorbell
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.autolock
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.front_door
+        state: 'off'
+      - condition: template
+        value_template: "{{ not (now() - states.binary_sensor.front_door.last_changed).total_seconds() < 30 }}"
   action:
     - service: !secret telservice
       data:
