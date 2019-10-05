@@ -10,12 +10,12 @@ tvoff:
       data:
         entity_id: remote.living_room
         activity: "-1"
-smarttv:
+roku:
   sequence:
     - service: remote.turn_on
       data:
         entity_id: remote.living_room
-        activity: "33715861"
+        activity: "41301691"
 ps3:
   sequence:
     - service: remote.turn_on
@@ -27,14 +27,41 @@ netflix:
     - service: remote.turn_on
       data:
         entity_id: remote.living_room
-        activity: "33715861"
-    - delay:
-        seconds: 30
-    - service: remote.send_command
+        activity: "41301691"
+    - service: media_player.select_source
       data:
-        entity_id: remote.living_room
-        device: 54812781
-        command: Netflix
+        entity_id: media_player.roku_living_room
+        source: 12
+plex:
+   sequence:
+     - service: remote.turn_on
+       data:
+         entity_id: remote.living_room
+         activity: "41301691"
+     - service: media_player.select_source
+       data:
+         entity_id: media_player.roku_living_room
+         source: 13535
+hulu:
+   sequence:
+     - service: remote.turn_on
+       data:
+         entity_id: remote.living_room
+         activity: "41301691"
+     - service: media_player.select_source
+       data:
+         entity_id: media_player.roku_living_room
+         source: 2285
+amazon:
+   sequence:
+     - service: remote.turn_on
+       data:
+         entity_id: remote.living_room
+         activity: "41301691"
+     - service: media_player.select_source
+       data:
+         entity_id: media_player.roku_living_room
+         source: 13
 volumeup:
   alias: Volume Up
   sequence:
@@ -55,3 +82,35 @@ volumedown:
         command: VolumeDown
         num_repeats: 2
         delay_secs: 0.25
+pause:
+  alias: Pause
+  sequence:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.living_room
+        command: Pause
+        device: >
+          {% set activity = states.remote.living_room.attributes.current_activity %}
+          {% if activity == 'TV' %}
+            54812782
+          {% elif activity == 'Roku' %}
+            65287804
+          {% else %}
+            00000000
+          {% endif %}
+play:
+  alias: Play
+  sequence:
+    - service: remote.send_command
+      data_template:
+        entity_id: remote.living_room
+        command: Play
+        device: >
+          {% set activity = states.remote.living_room.attributes.current_activity %}
+          {% if activity == 'TV' %}
+            54812782
+          {% elif activity == 'Roku' %}
+            65287804
+          {% else %}
+            00000000
+          {% endif %}
