@@ -27,8 +27,8 @@
           Watching TV
         {% elif activity == 'PS3' %}
           Playing PS3
-        {% elif activity == 'Watch Smart TV' %}
-          Watching Smart TV
+        {% elif activity == 'Roku' %}
+          Watching Roku
         {% elif activity == 'PowerOff' %}
           Powered Off
         {% else %}
@@ -38,7 +38,7 @@
       icon_template: >-
         {% if is_state('sensor.living_room', 'Watching TV') %}
           mdi:television-guide
-        {% elif is_state('sensor.living_room', 'Watching Smart TV') %}
+        {% elif is_state('sensor.living_room', 'Watching Roku') %}
           mdi:plex
         {% elif is_state('sensor.living_room', 'Playing PS3') %}
           mdi:playstation

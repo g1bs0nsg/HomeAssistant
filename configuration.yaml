@@ -215,10 +215,8 @@ input_select:
       - Select Activity
       - Power Off
       - Cable TV
-      - Smart TV
-      - Netflix
+      - Roku
       - PS3
-      - Nintendo
     initial: Select Activity
     icon: mdi:monitor
 
