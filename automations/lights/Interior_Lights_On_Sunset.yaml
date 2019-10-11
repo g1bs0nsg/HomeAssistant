@@ -1,5 +1,5 @@
 # Turn on kitchen light at sunset
-# and trasition up to 50% brightness over 15 minutes
+# and transition up to 50% brightness over 15 minutes
 
 - id: Interior_Lights_On_Sunset
   alias: Interior Lights On - Sunset
@@ -9,8 +9,7 @@
       event: sunset
       offset: "-00:45:00"
     - platform: state
-      entity_id: group.all_devices
-      from: 'not_home'
+      entity_id: group.presence
       to: 'home'
   condition:
     condition: and
@@ -19,7 +18,7 @@
         after: sunset
         after_offset: "-00:45:00"
       - condition: state
-        entity_id: group.all_devices
+        entity_id: group.presence
         state: 'home'
       - condition: state
         entity_id: input_boolean.guest
