@@ -145,15 +145,6 @@ owntracks:
   region_mapping:
     home: home
 
-device_tracker:
-  - platform: unifi
-    host: !secret uhost
-    username: !secret unifiuser
-    password: !secret unifipass
-    verify_ssl: false
-    ssid_filter:
-      - !secret ssid
-
 # Person Tracking
 person:
   - name: !secret person1
