@@ -211,7 +211,7 @@ input_select:
     initial: Select Activity
     icon: mdi:monitor
 
-# Input boolean
+# Input booleans
 input_boolean:
   bedtime:
     name: bedtime
@@ -231,6 +231,15 @@ input_boolean:
   doorbell:
     name: Doorbell
     initial: on
+
+# Input Numbers
+input_number:
+  front_window_animation_speed:
+    name: Front Window Animation Speed
+    initial: 150
+    min: 1
+    max: 150
+    step: 10
 
 # Nest Platform
 nest:
@@ -286,6 +295,36 @@ light:
     payload_available: "Online"
     payload_not_available: "Offline"
     retain: false
+# Front Window LED
+  - platform: mqtt
+    schema: json
+    name: "Front Window"
+    state_topic: "study/frontwindow"
+    command_topic: "study/frontwindow/set"
+    effect: true
+    effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - solid
+      - twinkle
+    brightness: true
+    rgb: true
+    optimistic: false
+    qos: 0
 
 # Alarm Envisalink
 envisalink:
