@@ -68,7 +68,7 @@ volumeup:
     - service: remote.send_command
       data:
         entity_id: remote.living_room
-        device: 54812784
+        device: 65581244
         command: VolumeUp
         num_repeats: 2
         delay_secs: 0.25
@@ -78,7 +78,7 @@ volumedown:
     - service: remote.send_command
       data:
         entity_id: remote.living_room
-        device: 54812784
+        device: 65581244
         command: VolumeDown
         num_repeats: 2
         delay_secs: 0.25
