@@ -106,6 +106,7 @@ tplink:
   discovery: false
   switch:
     - host: 192.168.1.177
+    - host: 192.168.1.101
 
 # Harmony Remote - Living Room
 remote:
@@ -113,14 +114,6 @@ remote:
     name: Living Room
     activity: TV
     
-# Kodi
-media_player:
-  - platform: kodi
-    host: 192.168.0.86
-    port: 80
-    name: Kodi
-    enable_websocket: true
-
 # ZoneMinder
 zoneminder:
   host: !secret zhost
@@ -210,6 +203,40 @@ input_select:
       - PS3
     initial: Select Activity
     icon: mdi:monitor
+  frontwindow:
+    name: Front Window LED
+    options:
+      - "Christmas"
+      - "Xmas"
+      - "Candy Cane"
+      - "Holly Jolly"
+      - "Valentine"
+      - "Lovey Day"
+      - "St Patty"
+      - "Easter"
+      - "USA"
+      - "Independence"
+      - "Halloween"
+      - "Punkin"
+      - "Thanksgiving"
+      - "Turkey Day"
+      - "BPM"
+      - "Confetti"
+      - "Cyclon Rainbow"
+      - "Dots"
+      - "Fire"
+      - "Glitter"
+      - "Juggle"
+      - "Lightning"
+      - "Police All"
+      - "Police One"
+      - "Rainbow"
+      - "Rainbow with Glitter"
+      - "Ripple"
+      - "Sinelon"
+      - "Solid"
+      - "Twinkle"
+    initial: "Solid"
 
 # Input booleans
 input_boolean:
@@ -297,34 +324,14 @@ light:
     retain: false
 # Front Window LED
   - platform: mqtt
-    schema: json
     name: "Front Window"
-    state_topic: "study/frontwindow"
-    command_topic: "study/frontwindow/set"
-    effect: true
-    effect_list:
-      - bpm
-      - candy cane
-      - confetti
-      - cyclon rainbow
-      - dots
-      - fire
-      - glitter
-      - juggle
-      - lightning
-      - noise
-      - police all
-      - police one
-      - rainbow
-      - rainbow with glitter
-      - ripple
-      - sinelon
-      - solid
-      - twinkle
-    brightness: true
-    rgb: true
+    command_topic: "study/frontwindow/setpower"
+    state_topic: "study/frontwindow/setpowerpub"
+    rgb_state_topic: "study/frontwindow/setcolorpub"
+    rgb_command_topic: "study/frontwindow/setcolor"
+    brightness_state_topic: "study/frontwindow/setbrightnesspub"
+    brightness_command_topic: "study/frontwindow/setbrightness"
     optimistic: false
-    qos: 0
 
 # Alarm Envisalink
 envisalink:

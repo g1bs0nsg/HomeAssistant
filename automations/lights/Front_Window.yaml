@@ -1,11 +1,24 @@
-- id: front_window_led
-  alias: Front Window LED
+- id: front_window_animation
+  alias: Front Window Animation Speed
   initial_state: on
   trigger:
     - platform: state
-      entity_id: input_slider.front_window_animation_speed
+      entity_id: input_number.front_window_animation_speed
   action:
     - service: mqtt.publish
       data_template:
-        topic: "study/frontwindow/set"
-        payload: '{"transition":{{ trigger.to_state.state | int }}}'
+        topic: "study/frontwindow/setanimationspeed"
+        payload: '{{ trigger.to_state.state | int }}'
+
+- id: front_window_effect
+  alias: Front Window Effect
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: input_select.frontwindow
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "study/frontwindow/seteffect"
+        payload: '{{ trigger.to_state.state | string }}'
+

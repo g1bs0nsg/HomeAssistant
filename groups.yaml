@@ -57,6 +57,7 @@ cameras:
   entities:
     - camera.front_porch
     - camera.back_porch
+    - camera.dog_cam
 
 interior_switches:
   name: Interior Lights 
