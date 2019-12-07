@@ -3,7 +3,7 @@ tv:
     - service: remote.turn_on
       data:
         entity_id: remote.living_room
-        activity: "33715859"
+        activity: "41967227"
 tvoff:
   sequence:
     - service: remote.turn_on
