@@ -1,0 +1,31 @@
+# Turn on interior Christmas decorations at
+# sunset, off at 2am.
+
+- id: christmas_interior_on_sunset
+  alias: Christmas Interior Decorations On Sunset
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:45:00"
+  condition:
+    condition: state
+    entity_id: input_boolean.guest
+    state: 'off'
+  action:
+    service: switch.turn_on
+    entity_id: switch.dust_collector
+
+- id: christmas_interior_off
+  alias: Christmas Interior Decorations Off
+  initial_state: on
+  trigger:
+    platform: time
+    at: "02:00:00"
+  condition:
+    condition: state
+    entity_id: input_boolean.guest
+    state: 'off'
+  action:
+    service: switch.turn_off
+    entity_id: switch.dust_collector
