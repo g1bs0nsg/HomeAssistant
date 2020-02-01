@@ -23,7 +23,7 @@ bedtime:
         - light.front_entry
         - light.back_entry
         - light.back_porch_light
-    - service: alarm_control_panel.envisalink_alarm_keypress
+    - service: envisalink.alarm_keypress
       data:
         entity_id: alarm_control_panel.home
         keypress: !secret nightarm

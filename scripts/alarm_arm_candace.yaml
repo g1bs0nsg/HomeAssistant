@@ -1,6 +1,6 @@
 arm_daytime:
   sequence:
-    - service: alarm_control_panel.envisalink_alarm_keypress
+    - service: envisalink.alarm_keypress
       entity_id: alarm_control_panel.home
       data:
         keypress: '*102#'

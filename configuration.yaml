@@ -124,6 +124,16 @@ zoneminder:
 # Cameras
 camera:
   - platform: zoneminder
+#  - platform: doorbird
+
+#doorbird:
+#  devices:
+#    - host: !secret dbhost
+#      username: !secret dbusername
+#      password: !secret dbpassword
+#      token: !secret dbtoken
+#      name: FrontDoor
+#      hass_url_override: !secret dburl
 
 # ZWave
 zwave:
