@@ -1,6 +1,6 @@
 default_view:
   name: DEFAULT
-  view: yes
+  #  view: yes
   icon: mdi:home
   entities:
     - alarm_control_panel.home
@@ -14,14 +14,14 @@ default_view:
 
 camera_view:
   name: Cameras
-  view: yes
+  #  view: yes
   icon: mdi:camera
   entities:
     - group.cameras
 
 controls_view:
   name: Control Panel
-  view: yes
+  #  view: yes
   icon: mdi:dip-switch
   entities:
     - group.mastercontrols
@@ -32,7 +32,7 @@ controls_view:
 
 alarm_view:
   name: Alarm
-  view: yes
+  #  view: yes
   icon: mdi:lock
   entities:
     - group.locks
@@ -42,7 +42,7 @@ alarm_view:
 
 livingroom_view:
   name: Living Room
-  view: yes
+  #  view: yes
   icon: mdi:sofa
   entities:
     - group.livingroom
@@ -118,21 +118,21 @@ locks:
 
 doors:
   name: Doors
-  control: hidden
+  #  control: hidden
   entities:
     - binary_sensor.front_door
     - binary_sensor.back_door
     - binary_sensor.garage_door
 
 motion:
-  control: hidden
+  #  control: hidden
   name: Motion
   entities:
     - binary_sensor.living_room_motion
     
 windows:
   name: Windows
-  control: hidden
+  #  control: hidden
   entities:
     - binary_sensor.study_window_1
     - binary_sensor.study_window_2
