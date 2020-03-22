@@ -1,5 +1,4 @@
-# Turn on kitchen light at sunset
-# and transition up to 50% brightness over 15 minutes
+# Turn on front porch light at sunset
 
 - id: Exterior_Lights_On_Sunset
   alias: Exterior Lights On - Sunset

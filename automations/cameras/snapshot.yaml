@@ -85,4 +85,4 @@
           photo:
             - file: "/tmp/front_porch.jpg"
     - service: script.turn_on
-      entity_id: script.doorbell
+      entity_id: script.motion_alert

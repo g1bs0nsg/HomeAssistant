@@ -1,0 +1,13 @@
+- id: Frontdoor_IR_On
+  alias: Doorbird IR On at Night
+  initial_state: on
+  trigger:
+    - platform: time_pattern
+      minutes: /2
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: 'below_horizon'
+  action:
+    service: switch.turn_on
+    entity_id: switch.frontdoor_ir
