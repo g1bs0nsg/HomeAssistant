@@ -37,7 +37,7 @@ input_boolean.guest:
   icon: mdi:account-clock
 input_boolean.autolock:
   icon: mdi:lock-clock
-input_boolean.doorbell:
+input_boolean.motion_alert:
   icon: mdi:bell-ring
 sensor.front_porch:
   icon: mdi:cctv
