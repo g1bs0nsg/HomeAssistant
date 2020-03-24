@@ -266,8 +266,8 @@ input_boolean:
   autolock:
     name: Front Door Autolock
     initial: on
-  doorbell:
-    name: Doorbell
+  motion_alert:
+    name: Motion Alert
     initial: on
 
 # Input Numbers

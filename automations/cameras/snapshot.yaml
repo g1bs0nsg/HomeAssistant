@@ -67,7 +67,7 @@
         entity_id: input_boolean.guest
         state: 'off'
       - condition: state
-        entity_id: input_boolean.doorbell
+        entity_id: input_boolean.motion_alert
         state: 'on'
       - condition: state
         entity_id: input_boolean.autolock
@@ -84,5 +84,8 @@
         data:
           photo:
             - file: "/tmp/front_porch.jpg"
+    - delay: '00:00:30'
+    - condition: template
+      value_template: "{{ not (now() - states.automation.doorbird_ring.attributes.last_triggered).total_seconds() < 60 }}"
     - service: script.turn_on
       entity_id: script.motion_alert
