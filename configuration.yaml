@@ -109,6 +109,7 @@ tplink:
 # Harmony Remote - Living Room
 remote:
   - platform: harmony
+    host: 192.168.0.133
     name: Living Room
     activity: TV
     
