@@ -42,5 +42,3 @@
         data:
           entity_id: remote.living_room
           activity: 'PowerOff'
-
-- platform: doorbird
