@@ -20,7 +20,6 @@ bedtime:
     - service: light.turn_off
       entity_id:
         - light.hallway
-        - light.front_entry
         - light.back_entry
         - light.back_porch_light
     - service: envisalink.alarm_keypress

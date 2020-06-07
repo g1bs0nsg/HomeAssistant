@@ -45,8 +45,6 @@ updater:
 
 # Discover some devices automatically
 discovery:
-  ignore:
-    - igd
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -333,6 +331,18 @@ light:
     payload_available: "Online"
     payload_not_available: "Offline"
     retain: false
+# Bug Zapper
+  - platform: mqtt
+    name: "Bug Zapper"
+    state_topic: "stat/bug_zapper/POWER"
+    command_topic: "cmnd/bug_zapper/POWER"
+    availability_topic: "tele/bug_zapper/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false 
 # Front Window LED
   - platform: mqtt
     name: "Front Window"
