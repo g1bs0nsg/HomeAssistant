@@ -106,12 +106,17 @@ tplink:
     - host: 192.168.1.177
     - host: 192.168.1.101
 
-# Harmony Remote - Living Room
 remote:
+  # Harmony Remote - Living Room
   - platform: harmony
     host: 192.168.0.133
     name: Living Room
     activity: TV
+  # Broadlink RM 3 - Garage
+  - platform: broadlink
+    host: 192.168.1.102
+    mac: 24:DF:A7:E0:11:33
+    name: Garage
     
 # ZoneMinder
 zoneminder:

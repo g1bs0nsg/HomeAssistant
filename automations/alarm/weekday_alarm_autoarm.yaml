@@ -1,6 +1,6 @@
 - id: weekday_alarm_autoarm
   alias: Weekday Alarm Autoarm
-  initial_state: on
+  initial_state: off
   trigger:
     platform: template
     value_template: >
