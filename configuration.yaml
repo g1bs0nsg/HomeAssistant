@@ -117,6 +117,7 @@ remote:
     host: 192.168.1.102
     mac: 24:DF:A7:E0:11:33
     name: Garage
+    type: rm_mini3_newblackbean
     
 # ZoneMinder
 zoneminder:
@@ -218,6 +219,19 @@ input_select:
       - PS3
     initial: Select Activity
     icon: mdi:monitor
+  garage_hvac:
+    name: Fanspeed
+    options:
+      - ""
+      - "Auto"
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "Quiet"
+    initial: ""
+    icon: mdi:fan
   frontwindow:
     name: Front Window LED
     options:
