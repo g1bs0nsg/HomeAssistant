@@ -1,0 +1,255 @@
+# January
+- id: FrontWindow_January
+  alias: Front Window - January
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ now().month == 1 and now().day < 2 }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Confetti"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# February
+- id: FrontWindow_February
+  alias: Front Window - February
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ now().month == 2  and now().day < 15 }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Lovey Day"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# March
+- id: FrontWindow_March
+  alias: Front Window - March
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ now().month == 3 and now().day < 18 }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "St Patty"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# April
+- id: FrontWindow_April
+  alias: Front Window - April
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ (now().month == 3 and now().day >= 25) or (now().month == 4 and now().day <= 25) }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Easter"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# July
+- id: FrontWindow_July
+  alias: Front Window - July
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ now().month == 7 and now().day < 5 }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "USA"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# October
+- id: FrontWindow_October
+  alias: Front Window - October
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ now().month == 10 }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Halloween"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# November
+- id: FrontWindow_November
+  alias: Front Window - November
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ now().month == 11 }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Thanksgiving"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# December
+- id: FrontWindow_December
+  alias: Front Window - December
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: template
+      value_template: '{{ now().month == 12 }}'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Xmas"
+    - service: switch.turn_on
+      entity_id: input_boolean.holiday_lights
+
+# Any other time
+- id: FrontWindow_AllOthers
+  alias: Front Window - Not Holiday
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: state
+      entity_id: input_boolean.holiday_lights
+      state: 'off'
+  action:
+    - service: light.turn_on
+      entity_id: light.front_window
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Police All"
+    - delay: '00:00:05'
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Solid"
+    - service: light.turn_on
+      data:
+        entity_id: light.front_window
+        rgb_color: [75,0,130]
+        brightness: 128
+
+# Reset Holiday Lights switch to off
+- id: FrontWindow_HolidayLightSwitch
+  alias: Front Window - Holiday Light Switch
+  initial_state: on
+  trigger:
+    - platform: time
+      at: '23:59:00'
+  action:
+    - service: switch.turn_off
+      entity_id: input_boolean.holiday_lights
+
+# Turn off LEDs at midnight
+- id: LED_Lights_Off
+  alias: LED Lights Off
+  initial_state: on
+  trigger:
+    - platform: time
+      at: '23:59:00'
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.frontwindow
+        option: "Solid"
+    - delay: '00:00:05'
+    - service: light.turn_off
+      entity_id: light.front_window
