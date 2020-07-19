@@ -1,0 +1,12 @@
+garage_ac_poweroff:
+  sequence:
+    - service: remote.send_command 
+      data:
+        entity_id: remote.garage
+        device: hvac
+        command:
+          - poweroff
+    - service: input_select.select_option 
+      data:
+        entity_id: input_select.garage_hvac
+        option: ''

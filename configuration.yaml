@@ -287,6 +287,12 @@ input_boolean:
   motion_alert:
     name: Motion Alert
     initial: on
+  garage_thermostat:
+    name: Garage Thermostat
+    initial: on
+  holiday_lights:
+    name: Holiday Lights
+    initial: off
 
 # Input Numbers
 input_number:
