@@ -1,6 +1,6 @@
 # Weather prediction
 - name: Weather
-  platform: yr
+  platform: weather_data
   forecast: 24
   monitored_conditions:
     - temperature
