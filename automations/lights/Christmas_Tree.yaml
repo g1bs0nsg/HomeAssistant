@@ -1,0 +1,30 @@
+# Christmas Tree
+
+- id: Christmas_Tree_On
+  alias: Christmas Tree - On
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    condition: state
+    entity_id: group.presence
+    state: 'home'
+  action:
+    service: switch.turn_on
+    entity_id: switch.christmas_tree
+
+- id: Christmas_Tree_Off
+  alias: Christmas Tree - Off
+  initial_state: on
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '+00:45:00'
+  condition:
+    - condition: state
+      entity_id: input_boolean.guest
+      state: 'off'
+  action:
+    service: switch.turn_off
+    entity_id: switch.christmas_tree
