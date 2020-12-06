@@ -89,7 +89,7 @@ zone:
     icon: mdi:briefcase
   
 recorder:
-  purge_keep_days: 367
+  purge_keep_days: 10 
   db_url: !secret db_url
 
 # User Customizations
@@ -105,6 +105,7 @@ tplink:
   switch:
     - host: 192.168.1.177
     - host: 192.168.1.101
+    - host: 192.168.1.100
 
 remote:
   # Harmony Remote - Living Room
