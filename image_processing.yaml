@@ -8,8 +8,8 @@
   file_out:
     - "/tmp/{{ camera_entity.split('.')[1] }}.jpg"
   model:
-    graph: /home/homeassistant/.homeassistant/tensorflow/frozen_inference_graph.pb
+    graph: /home/homeassistant/.homeassistant/tensorflow/models/efficientdet_d7_coco17_tpu-32/
     categories: 
-      - person
+      - category: person
     area:
       left: 0.3

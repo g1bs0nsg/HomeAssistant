@@ -1,14 +1,3 @@
-# Weather prediction
-- name: Weather
-  platform: weather_data
-  forecast: 24
-  monitored_conditions:
-    - temperature
-    - dewpointTemperature
-    - humidity
-    - windSpeed
-    - cloudiness
-
 # Plex
 #- name: Plex
 #  platform: plex
@@ -52,7 +41,6 @@
 - platform: template
   sensors:
     front_door_lock_battery:
-      entity_id: zwave.lock_front_door
       value_template: >
         {% if states('zwave.lock_front_door') != 'ready' %}
           {{ unknown }}

@@ -13,7 +13,7 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
   # External Directories Hass is allowed to access
-  whitelist_external_dirs:
+  allowlist_external_dirs:
     - /tmp
 
 # Show links to resources in log and frontend
@@ -107,19 +107,6 @@ tplink:
     - host: 192.168.1.101
     - host: 192.168.1.100
 
-remote:
-  # Harmony Remote - Living Room
-  - platform: harmony
-    host: 192.168.0.133
-    name: Living Room
-    activity: TV
-  # Broadlink RM 3 - Garage
-  - platform: broadlink
-    host: 192.168.1.102
-    mac: 24:DF:A7:E0:11:33
-    name: Garage
-    type: rm_mini3_newblackbean
-    
 # ZoneMinder
 zoneminder:
   host: !secret zhost
