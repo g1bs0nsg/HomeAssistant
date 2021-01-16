@@ -69,7 +69,8 @@
   platform: mqtt
   state_topic: "zoneminder/4"
   qos: 0
-  value_template: '{% if value_json.state == "alarm" %} on {% else %} off {% endif %}'
+  #value_template: '{% if value_json.state == "alarm" %} on {% else %} off {% endif %}'
+  value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
 
 # Flume
 - platform: template

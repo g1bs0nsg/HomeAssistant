@@ -22,3 +22,4 @@ known_devices.yaml
 # Folders to include
 #!/tensorflow/**
 !/www/**
+front_porch.jpg

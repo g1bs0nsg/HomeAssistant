@@ -6,9 +6,9 @@
   source:
     - entity_id: camera.front_porch
   file_out:
-    - "/tmp/{{ camera_entity.split('.')[1] }}.jpg"
+    - "/home/homeassistant/.homeassistant/www/{{ camera_entity.split('.')[1] }}.jpg"
   model:
-    graph: /home/homeassistant/.homeassistant/tensorflow/models/efficientdet_d7_coco17_tpu-32/
+    graph: /home/homeassistant/.homeassistant/tensorflow/models/efficientdet_d1_coco17_tpu-32
     categories: 
       - category: person
     area:

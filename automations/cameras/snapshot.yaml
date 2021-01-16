@@ -5,42 +5,22 @@
     platform: state
     entity_id: sensor.front_porch
     to: 'on'
+  mode: single
   action:
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
-    - delay: '00:00:05'
-    - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
+    - alias: Repeat capture until motion alarm turns off
+      repeat:
+        sequence:
+          - service: image_processing.scan
+            entity_id: image_processing.tensorflow_front_porch
+          - delay: '00:00:01'
+        until:
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: sensor.front_porch
+                state: 'off'
+              - condition: template
+                value_template: "{{ states('image_processing.tensorflow_front_porch') > '0' }}"
 
 - id: reset_tensorflow
   alias: Reset Tensorflow State
@@ -83,7 +63,7 @@
         message: "Person detected on the front porch"
         data:
           photo:
-            - file: "/tmp/front_porch.jpg"
+            - file: "/home/homeassistant/.homeassistant/www/front_porch.jpg"
     - delay: '00:00:30'
     - condition: template
       value_template: "{{ not (now() - states.automation.doorbird_ring.attributes.last_triggered).total_seconds() < 60 }}"
