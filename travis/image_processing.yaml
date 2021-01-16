@@ -6,8 +6,8 @@
   source:
     - entity_id: camera.front_porch
   file_out:
-    - "/tmp/{{ camera_entity.split('.')[1] }}.jpg"
+    - "/www/{{ camera_entity.split('.')[1] }}.jpg"
   model:
-    graph: tensorflow/models/efficientdet_d7_coco17_tpu-32/
+    graph: tensorflow/models/
     categories: 
       - category: person
