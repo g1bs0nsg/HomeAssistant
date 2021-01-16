@@ -25,6 +25,9 @@ frontend:
 # Enables configuration UI
 config:
 
+# Enable Mobile App
+mobile_app:
+
 # Enables System Health
 system_health:
 
@@ -117,7 +120,6 @@ zoneminder:
 # Cameras
 camera:
   - platform: zoneminder
-#  - platform: doorbird
 
 doorbird:
   devices:
@@ -135,12 +137,12 @@ zwave:
   network_key: !secret secure_key
 
 # Device Tracking
-owntracks:
-  max_gps_accuracy: 200
-  waypoints: True
-  mqtt_topic: "owntracks/#"
-  region_mapping:
-    home: home
+#owntracks:
+#  max_gps_accuracy: 200
+#  waypoints: True
+#  mqtt_topic: "owntracks/#"
+#  region_mapping:
+#    home: home
 
 # Person Tracking
 person:
@@ -148,12 +150,10 @@ person:
     id: !secret person1id
     device_trackers:
       - !secret person1device1
-      - !secret person1device2
   - name: !secret person2
     id: !secret person2id
     device_trackers:
       - !secret person2device1
-      - !secret person2device2
 
 # MQTT
 mqtt:
@@ -178,6 +178,10 @@ notify:
     platform: telegram
     chat_id: !secret tchatid1
 
+rest_command:
+  tasker_nfc_office:
+    url: !secret arofficenfc
+
 # Calendar
 google:
   client_id: !secret gc_client_id
@@ -194,6 +198,7 @@ timer:
   cimzia:
   trash:
   dogs:
+  medicine:
 
 # Input Selects
 input_select:

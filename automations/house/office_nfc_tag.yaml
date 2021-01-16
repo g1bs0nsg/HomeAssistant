@@ -1,0 +1,17 @@
+- id: toggle_office_roku
+  alias: Toggle Office Roku
+  initial_state: on
+  trigger:
+    - platform: event
+      event_type: tag_scanned
+      event_data:
+        device_id: f809f410b4361656
+        tag_id: fd63aff9-078c-4653-a47a-0ed42272fd8b
+  action:
+    - service: remote.send_command
+      data:
+        entity_id: remote.office
+        command: power
+    - service: switch.turn_on
+      entity_id: switch.dog_cam
+    - service: rest_command.tasker_nfc_office
