@@ -69,9 +69,21 @@
   platform: mqtt
   state_topic: "zoneminder/4"
   qos: 0
-  #value_template: '{% if value_json.state == "alarm" %} on {% else %} off {% endif %}'
   value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
 
+- name: Front Door
+  platform: mqtt
+  state_topic: "zoneminder/8"
+  qos: 0
+  value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
+
+- platform: template
+  sensors:
+    front_porch_motion:
+      value_template: >-
+        {{ is_state('sensor.front_porch', 'on')
+           or is_state('sensor.front_door', 'on') }}
+      
 # Flume
 - platform: template
   sensors:

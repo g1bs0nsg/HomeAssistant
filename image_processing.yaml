@@ -5,6 +5,7 @@
   scan_interval: 604800
   source:
     - entity_id: camera.front_porch
+    - entity_id: camera.front_door
   file_out:
     - "/home/homeassistant/.homeassistant/www/{{ camera_entity.split('.')[1] }}.jpg"
   model:
@@ -13,3 +14,14 @@
       - category: person
     area:
       left: 0.3
+
+############################################################
+## Facebox
+############################################################
+- platform: facebox
+  scan_interval: 604800
+  ip_address: !secret fbhost
+  port: 8080
+  source:
+    - entity_id: camera.front_door
+      name: facebox_front_door
