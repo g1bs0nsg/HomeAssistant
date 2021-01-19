@@ -3,8 +3,8 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: sensor.front_porch
-    to: 'on'
+    entity_id: sensor.front_porch_motion
+    to: 'True'
   mode: single
   action:
     - alias: Repeat capture until motion alarm turns off
@@ -12,13 +12,16 @@
         sequence:
           - service: image_processing.scan
             entity_id: image_processing.tensorflow_front_porch
-          - delay: '00:00:01'
+          - delay: '00:00:02'
+          - service: image_processing.scan
+            entity_id: image_processing.tensorflow_front_door
+          - delay: '00:00:02'
         until:
           - condition: or
             conditions:
               - condition: state
-                entity_id: sensor.front_porch
-                state: 'off'
+                entity_id: sensor.front_porch_motion
+                state: 'False'
               - condition: template
                 value_template: "{{ states('image_processing.tensorflow_front_porch') > '0' }}"
 
@@ -27,8 +30,8 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: sensor.front_porch
-    to: 'off'
+    entity_id: sensor.front_porch_motion
+    to: 'False'
   action:
     - service: image_processing.scan
       entity_id: image_processing.tensorflow_front_porch
@@ -38,7 +41,9 @@
   initial_state: on
   trigger:
     platform: state
-    entity_id: image_processing.tensorflow_front_porch
+    entity_id: 
+      - image_processing.tensorflow_front_porch
+      - image_processing.tensorflow_front_door
     from: '0'
   condition:
     condition: and
@@ -64,6 +69,7 @@
         data:
           photo:
             - file: "/home/homeassistant/.homeassistant/www/front_porch.jpg"
+            - file: "/home/homeassistant/.homeassistant/www/front_door.jpg"
     - delay: '00:00:30'
     - condition: template
       value_template: "{{ not (now() - states.automation.doorbird_ring.attributes.last_triggered).total_seconds() < 60 }}"
