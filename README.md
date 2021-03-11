@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://github.com/home-assistant/home-assistant-assets/blob/master/loading-screen.gif">
-</p>
-
 A collection of [Home Assistant](https://home-assistant.io/) configuration files used in my personal setup.
 
 I am an IT Systems Engineer in my daily life, so if this setup seems like overkill, that's because it is.
