@@ -12,7 +12,7 @@
         sequence:
           - service: image_processing.scan
             entity_id: image_processing.facebox_front_door
-          - delay: '00:00:01'
+          - delay: '00:00:02'
         until:
           - condition: or
             conditions:

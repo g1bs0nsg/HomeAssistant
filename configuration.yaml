@@ -113,7 +113,7 @@ tplink:
 # ZoneMinder
 zoneminder:
   host: !secret zhost
-  path_zms: /cgi-bin-zm/nph-zms
+  path_zms: /zm/cgi-bin/nph-zms
   ssl: False
   verify_ssl: False
 
@@ -158,10 +158,11 @@ person:
 # MQTT
 mqtt:
   broker: !secret broker
-  port: 8883
+  #port: 8883
+  port: 1883
   username: !secret mquser
   password: !secret mqpass
-  certificate: auto
+  #certificate: auto
   discovery: true
   discovery_prefix: homeassistant
 

@@ -18,4 +18,8 @@
     - service: !secret telservice
       data_template:
         message: >
-          !secret fb_id_template
+          {% if 'Candace' in state_attr('image_processing.facebox_front_door', 'matched_faces') %}
+            Front door camera identified Candace, unlocking.
+          {% elif 'Britt' in state_attr('image_processing.facebox_front_door', 'matched_faces') %}
+            Front door camera identified Britt, unlocking.
+          {% endif %}
