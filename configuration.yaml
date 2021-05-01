@@ -136,14 +136,6 @@ zwave:
   usb_path: /dev/ttyACM0
   network_key: !secret secure_key
 
-# Device Tracking
-#owntracks:
-#  max_gps_accuracy: 200
-#  waypoints: True
-#  mqtt_topic: "owntracks/#"
-#  region_mapping:
-#    home: home
-
 # Person Tracking
 person:
   - name: !secret person1
