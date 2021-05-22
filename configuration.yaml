@@ -121,15 +121,15 @@ zoneminder:
 camera:
   - platform: zoneminder
 
-doorbird:
-  devices:
-    - host: !secret dbhost
-      username: !secret dbusername
-      password: !secret dbpassword
-      token: !secret dbtoken
-      name: FrontDoor
-      events:
-        - button_press
+#doorbird:
+#  devices:
+#    - host: !secret dbhost
+#      username: !secret dbusername
+#      password: !secret dbpassword
+#      token: !secret dbtoken
+#      name: FrontDoor
+#      events:
+#        - button_press
 
 # ZWave
 zwave:
@@ -294,8 +294,15 @@ nest:
   client_id: !secret n_client_id
   client_secret: !secret n_client_secret
 
-# Front Flood Lights
 light:
+# Kitchen Light Group
+  - platform: group
+    name: kitchen
+    entities:
+      - light.pendant1
+      - light.pendant2
+      - light.pendant3
+# Front Flood Lights
   - platform: mqtt
     name: "Front Flood Lights"
     state_topic: "stat/front_flood/POWER"

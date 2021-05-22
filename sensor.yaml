@@ -43,7 +43,7 @@
     front_door_lock_battery:
       value_template: >
         {% if states('zwave.lock_front_door') != 'ready' %}
-          {{ unknown }}
+          unknown
         {% else %}
           {{ (states.zwave.lock_front_door.attributes.battery_level)|int }}
         {% endif %}

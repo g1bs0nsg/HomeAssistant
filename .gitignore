@@ -13,6 +13,7 @@
 # yaml to explicitly ignore
 secrets.yaml
 known_devices.yaml
+google_calendars.yaml
 
 # Ignore folders
 .storage
