@@ -8,7 +8,7 @@ before_install:
   - sudo apt-get install -y libudev-dev python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 install:
   - pip3 install netdisco
-  - pip3 install homeassistant
+  - pip3 install homeassistant==2021.5.5
 script:
   - hass --version
   - hass -c . --script check_config
