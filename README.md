@@ -10,7 +10,7 @@ Whitebox server with AMD FX-8300 8 core Processor, 32 GB of RAM, 4 TB Raid Array
 
 Server is running [Proxmox VE](https://www.proxmox.com/en/proxmox-ve) Hypervisor
 
-All services are containers running [Centos](https://www.centos.org/) 7 linux.
+All services are containers running [Debian](https://www.debian.org/) 10 linux.
 
 Server is home to:
 
@@ -19,6 +19,7 @@ Server is home to:
 * [Centreon Monitoring Solution](https://www.centreon.com/en/)
 * [php IPAM](https://phpipam.net/)
 * [Deluge Torrent Server](https://dev.deluge-torrent.org/)
+* [Sonarr PVR](https://www.sonarr.tv/)
 * [Ansible Management](https://www.ansible.com/)
 * [Zoneminder](https://zoneminder.com/)
 * [Mosquitto MQTT](https://mosquitto.org/)
@@ -26,4 +27,4 @@ Server is home to:
 
 # Build Status:
 
-Currently running [Home Assistant](https://home-assistant.io/) version __2021.7__  <img src="https://travis-ci.com/g1bs0nsg/HomeAssistant.svg?branch=master">
+Currently running [Home Assistant](https://home-assistant.io/) version __2021.5.5__  <img src="https://travis-ci.com/g1bs0nsg/HomeAssistant.svg?branch=master">
