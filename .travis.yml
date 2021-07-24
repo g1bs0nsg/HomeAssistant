@@ -9,6 +9,7 @@ before_install:
 install:
   - pip3 install netdisco
   - pip3 install homeassistant
+  - pip3 install grpcio==1.38.1
 script:
   - hass --version
   - hass -c . --script check_config
