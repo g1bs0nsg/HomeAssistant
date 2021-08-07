@@ -27,4 +27,4 @@ Server is home to:
 
 # Build Status:
 
-Currently running [Home Assistant](https://home-assistant.io/) version __2021.5.5__  <img src="https://travis-ci.com/g1bs0nsg/HomeAssistant.svg?branch=master">
+Currently running [Home Assistant](https://home-assistant.io/) version __2021.8.3__  <img src="https://travis-ci.com/g1bs0nsg/HomeAssistant.svg?branch=master">

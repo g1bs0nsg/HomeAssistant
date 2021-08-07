@@ -8,7 +8,9 @@ before_install:
   - sudo apt-get install -y libudev-dev python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 install:
   - pip3 install netdisco
-  - pip3 install homeassistant==2021.5.5
+  - pip3 install homeassistant
+# Work around for grpcio pin at 1.31.0, new google-cloud-pubsub versions require grpcio>=1.38.0, breaks nest integration
+  - pip3 install google-cloud-pubsub==2.1.0
 script:
   - hass --version
   - hass -c . --script check_config
