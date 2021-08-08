@@ -23,5 +23,5 @@
   ip_address: !secret fbhost
   port: 8080
   source:
-    - entity_id: camera.front_door
+    - entity_id: camera.local_file
       name: facebox_front_door

@@ -120,16 +120,8 @@ zoneminder:
 # Cameras
 camera:
   - platform: zoneminder
-
-#doorbird:
-#  devices:
-#    - host: !secret dbhost
-#      username: !secret dbusername
-#      password: !secret dbpassword
-#      token: !secret dbtoken
-#      name: FrontDoor
-#      events:
-#        - button_press
+  - platform: local_file
+    file_path: /home/homeassistant/.homeassistant/www/front_door.jpg
 
 # ZWave
 zwave:

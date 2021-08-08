@@ -19,6 +19,7 @@ google_calendars.yaml
 .storage
 .cloud
 .google.token
+custom_components
 
 # Folders to include
 #!/tensorflow/**
