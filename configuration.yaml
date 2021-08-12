@@ -120,8 +120,6 @@ zoneminder:
 # Cameras
 camera:
   - platform: zoneminder
-  - platform: local_file
-    file_path: /home/homeassistant/.homeassistant/www/front_door.jpg
 
 # ZWave
 zwave:
