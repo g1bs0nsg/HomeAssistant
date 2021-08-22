@@ -11,10 +11,9 @@
       repeat:
         sequence:
           - service: image_processing.scan
-            entity_id: image_processing.tensorflow_front_porch
-          - delay: '00:00:02'
-          - service: image_processing.scan
-            entity_id: image_processing.tensorflow_front_door
+            entity_id:
+              - image_processing.tensorflow_front_porch
+              - image_processing.tensorflow_front_door
           - delay: '00:00:02'
         until:
           - condition: or
@@ -24,7 +23,7 @@
                 state: 'False'
               - condition: template
                 value_template: >-
-                  {{ state_attr('image_processing.tensorflow_front_porch', 'total_matches') > 0 and
+                  {{ state_attr('image_processing.tensorflow_front_porch', 'total_matches') > 0 or
                      state_attr('image_processing.tensorflow_front_door', 'total_matches') > 0 }}
 
 - id: reset_tensorflow
@@ -36,7 +35,9 @@
     to: 'False'
   action:
     - service: image_processing.scan
-      entity_id: image_processing.tensorflow_front_porch
+      entity_id: 
+        - image_processing.tensorflow_front_porch
+        - image_processing.tensorflow_front_door
 
 - id: front_porch_person_detected
   alias: Person Detected on Front Porch
@@ -66,7 +67,7 @@
         value_template: "{{ not (now() - states.binary_sensor.front_door.last_changed).total_seconds() < 30 }}"
       - condition: template
         value_template: >-
-          {{ state_attr('image_processing.tensorflow_front_porch', 'total_matches') > 0 and
+          {{ state_attr('image_processing.tensorflow_front_porch', 'total_matches') > 0 or 
              state_attr('image_processing.tensorflow_front_door', 'total_matches') > 0 }}
   action:
     - service: !secret telservice
