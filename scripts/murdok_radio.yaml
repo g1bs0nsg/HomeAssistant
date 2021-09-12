@@ -1,0 +1,34 @@
+# Start playing
+murdok_play:
+  alias: 'Murdok Radio Start'
+  sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.googlehome_living_room
+        volume_level: '0.1'
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.googlehome_living_room
+    - delay: 00:00:01
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.googlehome_living_room
+    - delay: 00:00:01
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.googlehome_living_room
+        media_content_id: 'https://rfcmedia.streamguys1.com/softrockhits.mp3'
+        media_content_type: 'audio/mp4'
+    - delay: 00:00:01
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.googlehome_living_room
+        volume_level: '0.3'
+
+# Stop playing
+murdok_stop:
+  alias: 'Murdok Radio Stop'
+  sequence:
+    - service: media_player.media_stop
+      data:
+        entity_id: media_player.googlehome_living_room
