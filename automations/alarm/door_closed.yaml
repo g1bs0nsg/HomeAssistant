@@ -16,9 +16,9 @@
     - service: !secret telservice
       data_template:
         message: >
-          {% for state in states.binary_sensor if 'door' in state.attributes.device_class and state.state == 'off' %}{%- if loop.last %}All doors are now closed. {% endif -%} {% endfor %}
+          {% for state in states.binary_sensor if state.attributes.device_class == 'door' and state.state == 'off' %}{%- if loop.last %}All doors are now closed. {% endif -%} {% endfor %}
     - service: tts.google_say
       entity_id: group.all_googlehomes
       data_template:
         message: >
-          {% for state in states.binary_sensor if 'door' in state.attributes.device_class and state.state == 'off' %}{%- if loop.last %}All doors are now closed. {% endif -%} {% endfor %}
+          {% for state in states.binary_sensor if state.attributes.device_class == 'door' and state.state == 'off' %}{%- if loop.last %}All doors are now closed. {% endif -%} {% endfor %}

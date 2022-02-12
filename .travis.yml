@@ -1,7 +1,7 @@
 dist: bionic
 language: python
 python:
-  - "3.8.7"
+  - "3.9"
 before_install:
   - mv travis/travis_secrets.yaml secrets.yaml
   - mv travis/image_processing.yaml image_processing.yaml
@@ -9,7 +9,6 @@ before_install:
 install:
   - pip3 install netdisco
   - pip3 install homeassistant
-  - pip3 install google-api-core==1.31.2
 script:
   - hass --version
   - hass -c . --script check_config

@@ -17,7 +17,7 @@ murdok_play:
     - service: media_player.play_media
       data:
         entity_id: media_player.googlehome_living_room
-        media_content_id: 'https://rfcmedia.streamguys1.com/softrockhits.mp3'
+        media_content_id: 'https://pureplay.cdnstream1.com/6010_128.mp3'
         media_content_type: 'audio/mp4'
     - delay: 00:00:01
     - service: media_player.volume_set

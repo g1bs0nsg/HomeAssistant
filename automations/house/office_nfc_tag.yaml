@@ -5,7 +5,7 @@
     - platform: event
       event_type: tag_scanned
       event_data:
-        device_id: f809f410b4361656
+        device_id: b61ae948e5812ff2
         tag_id: fd63aff9-078c-4653-a47a-0ed42272fd8b
   action:
     - service: remote.send_command

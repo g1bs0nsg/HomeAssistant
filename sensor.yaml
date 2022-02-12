@@ -91,3 +91,15 @@
       friendly_name: "Flume Flow Status"
       value_template: >-
         {{ states.sensor.flume_sensor.state != "0" }}
+
+# Weather
+- platform: template
+  sensors:
+    overnight_low_temp:
+      friendly_name: "Overnight Low Temperature"
+      value_template: >-
+        {% if state_attr('weather.home', 'forecast') == None %}
+          unknown
+        {% else %}
+          {{ state_attr('weather.home', 'forecast')[0]['templow'] }}
+        {% endif %}

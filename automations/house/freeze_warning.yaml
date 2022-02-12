@@ -1,0 +1,14 @@
+- id: freeze_warning
+  alias: Freeze Warning
+  initial_state: on
+  trigger:
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.overnight_low_temp
+      below: 35
+  action:
+    - service: !secret telservice
+      data:
+        message: "Freeze warning, cover outside spigots!"
