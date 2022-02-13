@@ -9,7 +9,8 @@ before_install:
 install:
   - pip3 install netdisco
   - pip3 install homeassistant
-  - pip3 install async_upnp_client
+  - pip3 install aiodiscover
+  - pip3 install scapy
 script:
   - hass --version
   - hass -c . --script check_config
