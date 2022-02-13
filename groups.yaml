@@ -114,7 +114,7 @@ locks:
   entities:
     - input_boolean.autolock
     - lock.front_door
-    - sensor.front_door_lock_battery
+    - sensor.front_door_battery_level
 
 doors:
   name: Doors

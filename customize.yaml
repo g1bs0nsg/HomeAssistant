@@ -4,8 +4,6 @@ light.hue_white_lamp_3:
   hidden: true
 media_player.chrome:
   friendly_name: Google Home - LR
-zwave.aeotec_zw090_zstick_gen5_us:
-  hidden: true
 sensor.weather_cloudiness:
   friendly_name: Cloudy
 sensor.weather_dewpoint_temperature:

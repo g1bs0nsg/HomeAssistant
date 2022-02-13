@@ -4,13 +4,9 @@
   alias: Change Front Door Batteries
   initial_state: on
   trigger:
-    platform: template
-    value_template: >
-      {% if states('zwave.lock_front_door') != 'ready' %}
-        {{ False }}
-      {% else %}
-        {{ (states.zwave.lock_front_door.attributes.battery_level)|int < 40 }}
-      {% endif %}
+    - platform: state
+      entity_id: binary_sensor.front_door_low_battery_level
+      to: "on"  
   condition:
     condition: state 
     entity_id: !secret personentity1
@@ -18,7 +14,7 @@
   action:
     - service: !secret telservice
       data_template:
-        message: "Batteries in the front door lock are below 40%, time to change them!"
+        message: "Batteries in the front door lock are low, time to change them!"
         data:
             inline_keyboard:
               - 'Batteries Changed:/removefdbatterykeyboard,Remind Me Later:/fdbatteryreminder'
@@ -80,7 +76,7 @@
   action:
     - service: !secret telservice
       data_template:
-        message: "Batteries in the front door lock are below 40%, time to change them!"
+        message: "Batteries in the front door lock are low, time to change them!"
         data:
             inline_keyboard:
               - 'Batteries Changed:/removefdbatterykeyboard,Remind Me Later:/fdbatteryreminder'

@@ -122,9 +122,9 @@ camera:
   - platform: zoneminder
 
 # ZWave
-zwave:
-  usb_path: /dev/ttyACM0
-  network_key: !secret secure_key
+#zwave:
+#  usb_path: /dev/ttyACM0
+#  network_key: !secret secure_key
 
 # Person Tracking
 person:
