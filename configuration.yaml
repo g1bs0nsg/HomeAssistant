@@ -103,12 +103,12 @@ wemo:
     - 192.168.0.31
 
 # TPLink
-tplink:
-  discovery: false
-  switch:
-    - host: 192.168.1.177
-    - host: 192.168.1.101
-    - host: 192.168.1.100
+#tplink:
+#  discovery: false
+#  switch:
+#    - host: 192.168.1.177
+#    - host: 192.168.1.101
+#    - host: 192.168.1.100
 
 # ZoneMinder
 zoneminder:
@@ -290,6 +290,7 @@ input_number:
 nest:
   client_id: !secret n_client_id
   client_secret: !secret n_client_secret
+  project_id: !secret n_project_id
 
 light:
 # Kitchen Light Group
