@@ -282,10 +282,10 @@ input_number:
     step: 0.05
 
 # Nest Platform
-nest:
-  client_id: !secret n_client_id
-  client_secret: !secret n_client_secret
-  project_id: !secret n_project_id
+#nest:
+#  client_id: !secret n_client_id
+#  client_secret: !secret n_client_secret
+#  project_id: !secret n_project_id
 
 light:
 # Kitchen Light Group
