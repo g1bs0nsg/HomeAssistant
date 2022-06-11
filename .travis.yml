@@ -5,7 +5,7 @@ python:
 before_install:
   - mv travis/travis_secrets.yaml secrets.yaml
   - mv travis/image_processing.yaml image_processing.yaml
-  - sudo apt-get install -y libudev-dev python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
+  - sudo apt-get install -y libudev-dev python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev libatlas-base-dev libopenjp2-7 libtiff5
 install:
   - pip3 install netdisco
   - pip3 install homeassistant
