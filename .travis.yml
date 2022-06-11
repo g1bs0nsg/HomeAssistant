@@ -11,6 +11,7 @@ install:
   - pip3 install homeassistant
   - pip3 install aiodiscover
   - pip3 install scapy
+  - pip3 install tensorflow==2.5.0
 script:
   - hass --version
   - hass -c . --script check_config
