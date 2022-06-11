@@ -133,15 +133,15 @@ person:
       - !secret person2device1
 
 # MQTT
-mqtt:
-  broker: !secret broker
+#mqtt:
+#  broker: !secret broker
   #port: 8883
-  port: 1883
-  username: !secret mquser
-  password: !secret mqpass
+#  port: 1883
+#  username: !secret mquser
+#  password: !secret mqpass
   #certificate: auto
-  discovery: true
-  discovery_prefix: homeassistant
+#  discovery: true
+#  discovery_prefix: homeassistant
 
 # Telegram Configuration
 telegram_bot:
