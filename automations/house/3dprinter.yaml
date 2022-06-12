@@ -1,0 +1,70 @@
+- id: 3dprinter_done
+  alias: 3D Print Done
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.octoprint_printing
+    from: 'on'
+    to: 'off'
+  action:
+    - service: !secret telservice
+      data:
+        message: "3D Print Complete!"
+
+- id: 3dprinter_poweroff_after_print
+  alias: 3D Printer Power Off After Print Finishes
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.octoprint_printing
+    from: 'on'
+    to: 'off'
+    for:
+      minutes: 20
+  condition:
+    condition: numeric_state
+    entity_id:
+      - sensor.octoprint_actual_bed_temp
+      - sensor.octoprint_actual_tool0_temp
+    below: 60
+  action:
+    - service: switch.turn_off
+      entity_id: switch.3d_printer
+    - service: !secret telservice
+      data:
+        message: "3D Printer has been idle for 20 minutes and is completely cooled down, powering off!"
+
+- id: 3dprinter_poweroff_idle
+  alias: 3D Printer Idle Power Off
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: switch.3d_printer
+    to: 'on'
+    for:
+      minutes: 30
+  condition:
+    condition: not
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.octoprint_printing
+        state: 'on'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.3d_printer
+    - service: !secret telservice
+      data:
+        message: "3D Printer has been idle for 30 minutes, shutting down!"
+
+- id: 3dprinter_error
+  alias: 3D Printer Error
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: binary_sensor.octoprint_printing_error
+    to: 'on'
+  action:
+    - service: !secret telservice
+      data:
+        message: "3D Printer has experienced an error and requires your attention!"
+
