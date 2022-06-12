@@ -1,0 +1,17 @@
+- id: Hass_Update_Available
+  alias: 'Home Assistant Update Available'
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_assistant_website_update_available
+      from: "off"
+      to: "on"
+  action:
+    - service: !secret telservice
+      data_template:
+        message: >
+          {% set HassVer = states('sensor.home_assistant_website') %}
+          {% set HassNotes = state_attr('sensor.home_assistant_website', 'release_notes') %}
+          Home Assistant version {{ HassVer }} is now available!
+          {{'\n'}}{{'\n'}}
+          {{ HassNotes }}
