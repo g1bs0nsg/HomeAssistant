@@ -42,3 +42,17 @@
         data:
           entity_id: remote.living_room
           activity: 'PowerOff'
+    # 3D Printer
+    3d_printer:
+      friendly_name: '3D Printer'
+      value_template: "{{ is_state('switch.3d_printer_power', 'on') }}"
+      turn_on:
+        - service: switch.turn_on
+          entity_id: switch.3d_printer_power
+        - service: switch.turn_on
+          entity_id: switch.3d_printer_lamp
+      turn_off:
+        - service: switch.turn_off
+          entity_id: switch.3d_printer_power
+        - service: switch.turn_off
+          entity_id: switch.3d_printer_lamp
