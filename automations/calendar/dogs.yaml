@@ -1,11 +1,31 @@
 # Triggers on google calendar event to give dogs medicine
+# - id: dogs_give_heatworm_flea_tick
+#   alias: Dogs - Give Heartworm/Flea/Tick
+#   initial_state: on
+#   trigger:
+#     platform: state
+#     entity_id: calendar.dogs
+#     to: 'on'
+#   action: 
+#     - service: !secret telservice
+#       data_template:
+#         message: "Did you give the dogs their medicine?"
+#         data:
+#           inline_keyboard: 'Yes:/dogsoff,Remind Me Later:/dogslater'
+#     - service: timer.start
+#       data:
+#         entity_id: timer.dogs
+#         duration: '00:30:00'
 - id: dogs_give_heatworm_flea_tick
   alias: Dogs - Give Heartworm/Flea/Tick
   initial_state: on
   trigger:
-    platform: state
-    entity_id: calendar.dogs
-    to: 'on'
+    - platform: calendar
+      entity_id: calendar.trefynwed_gmail_com
+      event: start
+  condition:
+    - condition: template
+      value_template: "{{ 'Dogs - Flea/Tick/Heartworm' in trigger.calendar_event.summary }}"
   action: 
     - service: !secret telservice
       data_template:
@@ -16,6 +36,7 @@
       data:
         entity_id: timer.dogs
         duration: '00:30:00'
+  mode: queued
 
 # Handle the telegram response for yes
 - id: dogs_off

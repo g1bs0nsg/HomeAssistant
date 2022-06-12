@@ -1,11 +1,32 @@
 # Triggers on google calendar event to put trash out
+# - id: trash_put_out
+#   alias: Put out the trash
+#   initial_state: on
+#   trigger:
+#     platform: state
+#     entity_id: calendar.trash
+#     to: 'on'
+#   action: 
+#     - service: !secret telservice
+#       data_template:
+#         message: "Did you put out the trash?"
+#         data:
+#           inline_keyboard: 'Yes:/trashoff'
+#     - service: timer.start
+#       data:
+#         entity_id: timer.trash
+#         duration: '00:30:00'
+
 - id: trash_put_out
   alias: Put out the trash
   initial_state: on
   trigger:
-    platform: state
-    entity_id: calendar.trash
-    to: 'on'
+    - platform: calendar
+      entity_id: calendar.trefynwed_gmail_com
+      event: start
+  condition:
+    - condition: template
+      value_template: "{{' Put out the trash' in trigger.calendar_event.summary }}"
   action: 
     - service: !secret telservice
       data_template:
@@ -16,6 +37,7 @@
       data:
         entity_id: timer.trash
         duration: '00:30:00'
+  mode: queued
 
 # Handle the telegram response for yes
 - id: trash_off
