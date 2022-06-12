@@ -8,10 +8,11 @@ before_install:
   - sudo apt-get install -y libudev-dev python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev libatlas-base-dev libopenjp2-7 libtiff5
 install:
   - pip3 install netdisco
-#  - pip3 install tensorflow==2.5.0
+  - pip3 install tensorflow==2.5.0
   - pip3 install homeassistant
   - pip3 install aiodiscover
   - pip3 install scapy
+  - pip3 install async_upnp_client
 script:
   - hass --version
   - hass -c . --script check_config
