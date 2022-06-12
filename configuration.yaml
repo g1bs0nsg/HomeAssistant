@@ -93,14 +93,6 @@ wemo:
   static:
     - 192.168.0.31
 
-# TPLink
-#tplink:
-#  discovery: false
-#  switch:
-#    - host: 192.168.1.177
-#    - host: 192.168.1.101
-#    - host: 192.168.1.100
-
 # ZoneMinder
 zoneminder:
   host: !secret zhost
@@ -111,15 +103,6 @@ zoneminder:
 # Cameras
 camera:
   - platform: zoneminder
-  - platform: mjpeg
-    still_image_url: http://octoprint.sky.net/webcam/?action=snapshot
-    mjpeg_url: http://octoprint.sky.net/webcam/?action=stream
-    name: octoprint
-
-# ZWave
-#zwave:
-#  usb_path: /dev/ttyACM0
-#  network_key: !secret secure_key
 
 # Person Tracking
 person:
@@ -131,17 +114,6 @@ person:
     id: !secret person2id
     device_trackers:
       - !secret person2device1
-
-# MQTT
-#mqtt:
-#  broker: !secret broker
-  #port: 8883
-#  port: 1883
-#  username: !secret mquser
-#  password: !secret mqpass
-  #certificate: auto
-#  discovery: true
-#  discovery_prefix: homeassistant
 
 # Telegram Configuration
 telegram_bot:
@@ -161,9 +133,9 @@ rest_command:
     url: !secret arofficenfc
 
 # Calendar
-google:
-  client_id: !secret gc_client_id
-  client_secret: !secret gc_client_secret
+#google:
+#  client_id: !secret gc_client_id
+#  client_secret: !secret gc_client_secret
 
 # IFTTT
 ifttt:
@@ -281,12 +253,6 @@ input_number:
     max: 1
     step: 0.05
 
-# Nest Platform
-#nest:
-#  client_id: !secret n_client_id
-#  client_secret: !secret n_client_secret
-#  project_id: !secret n_project_id
-
 light:
 # Kitchen Light Group
   - platform: group
@@ -295,76 +261,85 @@ light:
       - light.pendant1
       - light.pendant2
       - light.pendant3
+
+#MQTT Lights
+mqtt:
 # Front Flood Lights
-  - platform: mqtt
-    name: "Front Flood Lights"
-    state_topic: "stat/front_flood/POWER"
-    command_topic: "cmnd/front_flood/POWER"
-    availability_topic: "tele/front_flood/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+  light:
+    - name: "Front Flood Lights"
+      state_topic: "stat/front_flood/POWER"
+      command_topic: "cmnd/front_flood/POWER"
+      availability_topic: "tele/front_flood/LWT"
+      qos: 1
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      retain: false
 # Front Porch Light
-  - platform: mqtt
-    name: "Front Porch Light"
-    state_topic: "stat/front_porch/POWER"
-    command_topic: "cmnd/front_porch/POWER"
-    availability_topic: "tele/front_porch/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false 
+    - name: "Front Porch Light"
+      state_topic: "stat/front_porch/POWER"
+      command_topic: "cmnd/front_porch/POWER"
+      availability_topic: "tele/front_porch/LWT"
+      qos: 1
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      retain: false 
 # Back Flood Lights
-  - platform: mqtt
-    name: "Back Flood Lights"
-    state_topic: "stat/back_flood/POWER"
-    command_topic: "cmnd/back_flood/POWER"
-    availability_topic: "tele/back_flood/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+    - name: "Back Flood Lights"
+      state_topic: "stat/back_flood/POWER"
+      command_topic: "cmnd/back_flood/POWER"
+      availability_topic: "tele/back_flood/LWT"
+      qos: 1
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      retain: false
 # Back Porch Light
-  - platform: mqtt
-    name: "Back Porch Light"
-    state_topic: "stat/back_porch/POWER"
-    command_topic: "cmnd/back_porch/POWER"
-    availability_topic: "tele/back_porch/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+    - name: "Back Porch Light"
+      state_topic: "stat/back_porch/POWER"
+      command_topic: "cmnd/back_porch/POWER"
+      availability_topic: "tele/back_porch/LWT"
+      qos: 1
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      retain: false
 # Bug Zapper
-  - platform: mqtt
-    name: "Bug Zapper"
-    state_topic: "stat/bug_zapper/POWER"
-    command_topic: "cmnd/bug_zapper/POWER"
-    availability_topic: "tele/bug_zapper/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false 
+    - name: "Bug Zapper"
+      state_topic: "stat/bug_zapper/POWER"
+      command_topic: "cmnd/bug_zapper/POWER"
+      availability_topic: "tele/bug_zapper/LWT"
+      qos: 1
+      payload_on: "ON"
+      payload_off: "OFF"
+      payload_available: "Online"
+      payload_not_available: "Offline"
+      retain: false 
 # Front Window LED
-  - platform: mqtt
-    name: "Front Window"
-    command_topic: "study/frontwindow/setpower"
-    state_topic: "study/frontwindow/setpowerpub"
-    rgb_state_topic: "study/frontwindow/setcolorpub"
-    rgb_command_topic: "study/frontwindow/setcolor"
-    brightness_state_topic: "study/frontwindow/setbrightnesspub"
-    brightness_command_topic: "study/frontwindow/setbrightness"
-    optimistic: false
+    - name: "Front Window"
+      command_topic: "study/frontwindow/setpower"
+      state_topic: "study/frontwindow/setpowerpub"
+      rgb_state_topic: "study/frontwindow/setcolorpub"
+      rgb_command_topic: "study/frontwindow/setcolor"
+      brightness_state_topic: "study/frontwindow/setbrightnesspub"
+      brightness_command_topic: "study/frontwindow/setbrightness"
+      optimistic: false
+# Zoneminder Camera Sensors
+  sensor:
+    - name: Front Porch
+      state_topic: "zoneminder/4"
+      qos: 0
+      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
+
+    - name: Front Door
+      state_topic: "zoneminder/8"
+      qos: 0
+      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
 
 # Alarm Envisalink
 envisalink:
