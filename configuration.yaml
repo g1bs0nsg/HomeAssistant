@@ -261,6 +261,11 @@ light:
       - light.pendant1
       - light.pendant2
       - light.pendant3
+      
+# Make garage zwave switch show as light instead
+  - platform: switch
+    name: garage
+    entity_id: switch.garage_light_switch
 
 #MQTT Lights
 mqtt:
