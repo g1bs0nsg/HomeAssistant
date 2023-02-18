@@ -18,6 +18,7 @@
       entity_id: 
         - light.kitchen
         - light.front_entry
+        - light.front_door_entry
         - light.back_entry
         - light.hallway
       data:                                                 
@@ -33,6 +34,7 @@
     - service: light.turn_off
       entity_id:
         - light.front_entry
+        - light.front_door_entry
         - light.back_entry
         - light.hallway
 - id: Arrival_Exterior_Lights_On

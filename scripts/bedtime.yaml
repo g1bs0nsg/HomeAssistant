@@ -22,6 +22,8 @@ bedtime:
         - light.hallway
         - light.back_entry
         - light.back_porch_light
+        - light.back_flood_lights
+        - light.front_flood_lights
     - service: envisalink.alarm_keypress
       data:
         entity_id: alarm_control_panel.home

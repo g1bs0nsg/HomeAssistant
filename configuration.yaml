@@ -262,37 +262,27 @@ light:
       - light.pendant2
       - light.pendant3
       
-# Make garage zwave switch show as light instead
+# Make zwave switches show as lights instead
   - platform: switch
     name: garage
     entity_id: switch.garage_light_switch
+  
+  - platform: switch
+    name: front_flood_lights
+    entity_id: switch.front_flood
+
+  - platform: switch
+    name: front_porch_light
+    entity_id: switch.front_porch
+
+  - platform: switch
+    name: front_door_entry
+    entity_id: switch.front_door_entry
 
 #MQTT Lights
 mqtt:
-# Front Flood Lights
-  light:
-    - name: "Front Flood Lights"
-      state_topic: "stat/front_flood/POWER"
-      command_topic: "cmnd/front_flood/POWER"
-      availability_topic: "tele/front_flood/LWT"
-      qos: 1
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      retain: false
-# Front Porch Light
-    - name: "Front Porch Light"
-      state_topic: "stat/front_porch/POWER"
-      command_topic: "cmnd/front_porch/POWER"
-      availability_topic: "tele/front_porch/LWT"
-      qos: 1
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      retain: false 
 # Back Flood Lights
+  light:
     - name: "Back Flood Lights"
       state_topic: "stat/back_flood/POWER"
       command_topic: "cmnd/back_flood/POWER"

@@ -63,9 +63,11 @@ interior_switches:
   name: Interior Lights 
   entities:
     - light.front_entry
+    - light.front_door_entry
     - light.back_entry
     - light.hallway
     - light.kitchen
+    - light.garage
 
 exterior_switches:
   name: Exterior Lights
