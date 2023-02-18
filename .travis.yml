@@ -9,7 +9,7 @@ before_install:
 install:
   - pip3 install netdisco
   - pip3 install tensorflow==2.5.0
-  - pip3 install homeassistant
+  - pip3 install homeassistant==2022.9.7
   - pip3 install aiodiscover
   - pip3 install scapy
   - pip3 install async_upnp_client
