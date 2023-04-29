@@ -21,7 +21,7 @@ Server is home to:
 * [Deluge Torrent Server](https://dev.deluge-torrent.org/)
 * [Sonarr PVR](https://www.sonarr.tv/)
 * [Ansible Management](https://www.ansible.com/)
-* [Zoneminder](https://zoneminder.com/)
+* [Frigate](https://frigate.video)
 * [Mosquitto MQTT](https://mosquitto.org/)
 * [Home Assistant](https://home-assistant.io/)
 
