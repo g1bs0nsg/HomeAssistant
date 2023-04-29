@@ -31,6 +31,9 @@ mobile_app:
 # Enables System Health
 system_health:
 
+# Enable local media
+media_source:
+
 http:
   # Secrets are defined in the file secrets.yaml
   # api_password: !secret http_password
@@ -74,7 +77,7 @@ automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
 scene: !include scenes.yaml
 switch: !include switch.yaml
-image_processing: !include image_processing.yaml
+#image_processing: !include image_processing.yaml
 
 zone:
   - name: Work
@@ -94,15 +97,15 @@ wemo:
     - 192.168.0.31
 
 # ZoneMinder
-zoneminder:
-  host: !secret zhost
-  path_zms: /zm/cgi-bin/nph-zms
-  ssl: False
-  verify_ssl: False
+#zoneminder:
+#  host: !secret zhost
+#  path_zms: /zm/cgi-bin/nph-zms
+#  ssl: False
+#  verify_ssl: False
 
 # Cameras
-camera:
-  - platform: zoneminder
+#camera:
+#  - platform: zoneminder
 
 # Person Tracking
 person:
@@ -325,16 +328,16 @@ mqtt:
       brightness_command_topic: "study/frontwindow/setbrightness"
       optimistic: false
 # Zoneminder Camera Sensors
-  sensor:
-    - name: Front Porch
-      state_topic: "zoneminder/4"
-      qos: 0
-      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
+#  sensor:
+#    - name: Front Porch
+#      state_topic: "zoneminder/4"
+#      qos: 0
+#      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
 
-    - name: Front Door
-      state_topic: "zoneminder/8"
-      qos: 0
-      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
+#    - name: Front Door
+#      state_topic: "zoneminder/8"
+#      qos: 0
+#      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
 
 # Alarm Envisalink
 envisalink:

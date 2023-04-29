@@ -29,21 +29,6 @@
           mdi:television
         {% endif %}
 
-- platform: template
-  sensors:
-    front_porch_motion:
-      value_template: >-
-        {{ is_state('sensor.front_porch', 'on')
-           or is_state('sensor.front_door', 'on') }}
-      
-# Flume
-- platform: template
-  sensors:
-    flume_status:
-      friendly_name: "Flume Flow Status"
-      value_template: >-
-        {{ states.sensor.flume_sensor.state != "0" }}
-
 # Weather
 - platform: template
   sensors:
