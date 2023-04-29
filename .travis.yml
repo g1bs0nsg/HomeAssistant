@@ -1,7 +1,7 @@
 dist: focal
 language: python
 python:
-  - "3.9"
+  - "3.10"
 before_install:
   - mv travis/travis_secrets.yaml secrets.yaml
   - sudo apt-get install -y libudev-dev python-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev libatlas-base-dev libopenjp2-7 libtiff5
