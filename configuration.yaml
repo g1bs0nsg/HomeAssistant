@@ -10,6 +10,8 @@ homeassistant:
   unit_system: imperial
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone
+  currency: USD
+  country: US
   # Customization file
   customize: !include customize.yaml
   # External Directories Hass is allowed to access
@@ -88,6 +90,9 @@ zone:
 recorder:
   purge_keep_days: 10 
   db_url: !secret db_url
+  exclude:
+    entities:
+      - sensor.candace_phone_active_notification_count
 
 # User Customizations
 
@@ -95,17 +100,6 @@ recorder:
 wemo:
   static:
     - 192.168.0.31
-
-# ZoneMinder
-#zoneminder:
-#  host: !secret zhost
-#  path_zms: /zm/cgi-bin/nph-zms
-#  ssl: False
-#  verify_ssl: False
-
-# Cameras
-#camera:
-#  - platform: zoneminder
 
 # Person Tracking
 person:
@@ -327,17 +321,6 @@ mqtt:
       brightness_state_topic: "study/frontwindow/setbrightnesspub"
       brightness_command_topic: "study/frontwindow/setbrightness"
       optimistic: false
-# Zoneminder Camera Sensors
-#  sensor:
-#    - name: Front Porch
-#      state_topic: "zoneminder/4"
-#      qos: 0
-#      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
-
-#    - name: Front Door
-#      state_topic: "zoneminder/8"
-#      qos: 0
-#      value_template: '{% if value_json.eventtype == "event_start" %} on {% else %} off {% endif %}'
 
 # Alarm Envisalink
 envisalink:
