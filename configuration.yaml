@@ -12,6 +12,7 @@ homeassistant:
   time_zone: !secret time_zone
   currency: USD
   country: US
+  internal_url: "http://hass.sky.net:8123"
   # Customization file
   customize: !include customize.yaml
   # External Directories Hass is allowed to access
@@ -35,6 +36,12 @@ system_health:
 
 # Enable local media
 media_source:
+
+# Enable My Home Assistant
+my:
+
+# Enable Conversation for Assist
+conversation:
 
 http:
   # Secrets are defined in the file secrets.yaml
