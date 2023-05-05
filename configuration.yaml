@@ -40,9 +40,6 @@ media_source:
 # Enable My Home Assistant
 my:
 
-# Enable Conversation for Assist
-conversation:
-
 http:
   # Secrets are defined in the file secrets.yaml
   # api_password: !secret http_password
