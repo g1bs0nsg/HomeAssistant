@@ -1,0 +1,21 @@
+- id: Facial_Recognition
+  alias: Double Take Facial Recognition
+  initial_state: on
+  trigger:
+    - platform: state
+      entity_id: sensor.double_take_britt
+  condition:
+    - condition: template
+      value_template: '{{ trigger.to_state.attributes.id != trigger.from_state.attributes.id }}'
+  action:
+    - service: telegram_bot.send_photo
+      data:
+        url: >-
+          http://frigate.sky.net:3000/api/storage/matches/{{ trigger.to_state.attributes.match.filename }}?box=true
+        caption: |-
+          {% if trigger.to_state.attributes.match is defined %}
+            {{ trigger.to_state.attributes.match.name | title }} identified by {{trigger.to_state.attributes.camera | replace("_", " ") | title}} @ {{trigger.to_state.attributes.match.confidence}}%, took {{trigger.to_state.attributes.attempts}} attempt(s) @ {{trigger.to_state.attributes.duration}} sec
+          {% endif %}
+        target: !secret tchatid1
+  mode: single
+  max_exceeded: silent
