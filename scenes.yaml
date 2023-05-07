@@ -2,5 +2,4 @@
   entities:
     light.kitchen:
       state: on
-      brightness_pct: 50
-      transition: 900
+      brightness: 128
