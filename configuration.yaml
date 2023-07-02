@@ -64,12 +64,6 @@ map:
 # Track the sun
 sun:
 
-# Workday/Holiday
-binary_sensor:
-  - platform: workday
-    country: US
-    workdays: [mon, tue, wed, thu, fri]
-
 # Text to speech
 tts:
   - platform: google_translate
