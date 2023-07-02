@@ -246,7 +246,7 @@ input_number:
     min: 1
     max: 150
     step: 10
-# Control volume for Kitchen google home
+# Control volume for Front Entry google home
   murdok_radio:
     name: Volume
     icon: mdi:volume-high

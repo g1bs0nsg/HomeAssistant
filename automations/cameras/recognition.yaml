@@ -5,6 +5,19 @@
     - platform: state
       entity_id: sensor.double_take_britt
   condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: input_boolean.motion_alert
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.autolock
+          state: 'on'
+        - condition: state
+          entity_id: binary_sensor.front_door
+          state: 'off'
+        - condition: template
+          value_template: "{{ not (now() - states.binary_sensor.front_door.last_changed).total_seconds() < 30 }}"
     - condition: template
       value_template: '{{ trigger.to_state.attributes.id != trigger.from_state.attributes.id }}'
   action:

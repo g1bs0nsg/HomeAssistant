@@ -6,5 +6,5 @@
   action:
     - service: media_player.volume_set
       data:
-        entity_id: media_player.googlehome_living_room
+        entity_id: media_player.googlehome_study
         volume_level: '{{ states.input_number.murdok_radio.state }}'
