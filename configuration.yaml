@@ -29,7 +29,7 @@ frontend:
 config:
 
 # Enable Mobile App
-mobile_app:
+#mobile_app:
 
 # Enables System Health
 system_health:
@@ -47,7 +47,7 @@ http:
   # base_url: example.duckdns.org:8123
 
 # Discover some devices automatically
-discovery:
+#discovery:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -70,7 +70,7 @@ tts:
     service_name: google_say
 
 # Includes
-cloud: !include cloud.yaml
+#cloud: !include cloud.yaml
 sensor: !include sensor.yaml
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
