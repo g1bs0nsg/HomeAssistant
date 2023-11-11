@@ -70,7 +70,7 @@ tts:
     service_name: google_say
 
 # Includes
-#cloud: !include cloud.yaml
+cloud: !include cloud.yaml
 sensor: !include sensor.yaml
 group: !include groups.yaml
 automation: !include_dir_merge_list automations/
