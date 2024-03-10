@@ -1,0 +1,34 @@
+---
+name: Home Assistant CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+
+      - name: Install Dependencies
+        run: python -m pip install --upgrade pip wheel
+
+      - name: Install Home Assistant
+        run: python -m pip install homeassistant
+
+      - name: Move secrets.yaml
+        run: mv fake_serets.yaml secrets.yaml
+
+      - name: Home Assistant Version
+        run: python -m homeassistant --version
+
+      - name: Check Config
+        run: python -m homeassistant --config . --script check_config
