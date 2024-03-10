@@ -24,7 +24,7 @@ jobs:
         uses: "docker://pipelinecomponents/remark-lint:latest"
         continue-on-error: true
         with:
-          args: "remakr --no-stdout --color --frail --use preset-lint-recommended ."
+          args: "remark --no-stdout --color --frail --use preset-lint-recommended ."
 
   build:
     name: Build Test Environment
@@ -33,19 +33,6 @@ jobs:
     steps:
       - name: Check out configuration from Github
         uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-      - name: Display Python version
-        run: python -c "import sys; print(sys.version)"
-      - name: Install Dependencies
-        run: python -m pip install --upgrade pip wheel
-
-      - name: Install Home Assistant
-        run: python -m pip install homeassistant
-      - name: Move secrets.yaml
-        run: mv fake_secrets.yaml secrets.yaml
       - name: Create empty custom components folder
         run: |
           if [ -d "custom_components" ]; then rm -rf custom_components; fi
@@ -54,7 +41,18 @@ jobs:
         run: |
           git clone https://github.com/blakeblackshear/frigate-hass-integration.git frigate
           mv -v ./frigate/custom_components/* ./custom_components/
-          rm -rf ./frigate
+      - name: Move secrets.yaml
+        run: mv fake_secrets.yaml secrets.yaml
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+      - name: Install Dependencies
+        run: python -m pip install --upgrade pip wheel
+      - name: Install Home Assistant
+        run: python -m pip install homeassistant
       - name: Home Assistant Version
         run: python -m homeassistant --version
       - name: Check Config
