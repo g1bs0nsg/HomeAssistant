@@ -21,7 +21,7 @@ jobs:
       - name: Check out configuration from Github
         uses: actions/checkout@v4
       - name: Run Remark Lint
-        uses: "docker://pipelinecomponents/remark-line:latest"
+        uses: "docker://pipelinecomponents/remark-lint:latest"
         continue-on-error: true
         with:
           args: "remakr --no-stdout --color --frail --use preset-lint-recommended ."
