@@ -9,6 +9,7 @@
 !*.yml
 !.gitignore
 !*.md
+!.yamllint
 
 # yaml to explicitly ignore
 secrets.yaml

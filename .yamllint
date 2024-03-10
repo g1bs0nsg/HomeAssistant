@@ -1,0 +1,4 @@
+---
+# Used to configure yamllint to skip some checks
+rules:
+  line-length: disable

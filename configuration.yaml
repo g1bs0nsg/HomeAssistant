@@ -8,7 +8,8 @@ homeassistant:
   elevation: !secret elevation
   # metric for Metric, imperial for Imperial
   unit_system: imperial
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  # Pick timezone from here: 
+  # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone
   currency: USD
   country: US
@@ -84,7 +85,7 @@ zone:
     latitude: !secret worklatitude
     longitude: !secret worklongitude
     icon: mdi:briefcase
-  
+
 recorder:
   purge_keep_days: 10 
   db_url: !secret db_url
@@ -256,12 +257,12 @@ light:
       - light.pendant1
       - light.pendant2
       - light.pendant3
-      
+
 # Make zwave switches show as lights instead
   - platform: switch
     name: garage
     entity_id: switch.garage_light_switch
-  
+
   - platform: switch
     name: front_flood_lights
     entity_id: switch.front_flood
