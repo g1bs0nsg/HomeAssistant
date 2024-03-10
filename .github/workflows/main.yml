@@ -25,7 +25,7 @@ jobs:
         run: python -m pip install homeassistant
 
       - name: Move secrets.yaml
-        run: mv fake_serets.yaml secrets.yaml
+        run: mv fake_secrets.yaml secrets.yaml
 
       - name: Home Assistant Version
         run: python -m homeassistant --version
