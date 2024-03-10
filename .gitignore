@@ -5,7 +5,6 @@
 !*/
 
 # Files to include
-!.travis.yml
 !*.yaml
 !.gitignore
 !*.md
@@ -26,4 +25,4 @@ custom_components
 !/www/**
 front_porch.jpg
 front_door.jpg
-/www/facebox
+.github
