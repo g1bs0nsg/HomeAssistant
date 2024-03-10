@@ -6,6 +6,7 @@
 
 # Files to include
 !*.yaml
+!*.yml
 !.gitignore
 !*.md
 
@@ -21,8 +22,7 @@ google_calendars.yaml
 custom_components
 
 # Folders to include
-#!/tensorflow/**
 !/www/**
+!.github
 front_porch.jpg
 front_door.jpg
-.github
