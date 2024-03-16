@@ -33,35 +33,35 @@ netflix:
         entity_id: media_player.roku_living_room
         source: 12
 plex:
-   sequence:
-     - service: remote.turn_on
-       data:
-         entity_id: remote.living_room
-         activity: "41301691"
-     - service: media_player.select_source
-       data:
-         entity_id: media_player.roku_living_room
-         source: 13535
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "41301691"
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.roku_living_room
+        source: 13535
 hulu:
-   sequence:
-     - service: remote.turn_on
-       data:
-         entity_id: remote.living_room
-         activity: "41301691"
-     - service: media_player.select_source
-       data:
-         entity_id: media_player.roku_living_room
-         source: 2285
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "41301691"
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.roku_living_room
+        source: 2285
 amazon:
-   sequence:
-     - service: remote.turn_on
-       data:
-         entity_id: remote.living_room
-         activity: "41301691"
-     - service: media_player.select_source
-       data:
-         entity_id: media_player.roku_living_room
-         source: 13
+  sequence:
+    - service: remote.turn_on
+      data:
+        entity_id: remote.living_room
+        activity: "41301691"
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.roku_living_room
+        source: 13
 volumeup:
   alias: Volume Up
   sequence:
