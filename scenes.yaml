@@ -2,4 +2,4 @@
   entities:
     light.kitchen:
       state: on
-      brightness: 128
+      brightness: 1

@@ -37,6 +37,12 @@
         - light.front_door_entry
         - light.back_entry
         - light.hallway
+        - light.pendant2
+        - light.pendant3
+    - service: light.turn_on
+      entity_id: light.pendant1
+      data:
+        brightness_pct: 1
 - id: Arrival_Exterior_Lights_On
   initial_state: on
   alias: Exterior Lights On - Arriving Home

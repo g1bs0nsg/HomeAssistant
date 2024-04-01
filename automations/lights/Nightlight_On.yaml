@@ -24,5 +24,5 @@
         brightness_pct: 1
     - service: light.turn_on
       data:
-        entity_id: light.kitchen
-        brightness_pct: 100
+        entity_id: light.pendant1
+        brightness_pct: 1
