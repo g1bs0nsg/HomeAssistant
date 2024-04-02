@@ -1,5 +1,5 @@
 - name: lights_on_sunset
   entities:
-    light.kitchen:
+    light.pendant1:
       state: on
       brightness: 1
