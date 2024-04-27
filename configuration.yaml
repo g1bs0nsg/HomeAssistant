@@ -80,11 +80,11 @@ scene: !include scenes.yaml
 switch: !include switch.yaml
 #image_processing: !include image_processing.yaml
 
-zone:
-  - name: Work
-    latitude: !secret worklatitude
-    longitude: !secret worklongitude
-    icon: mdi:briefcase
+#zone:
+#  - name: Work
+#  latitude: !secret worklatitude
+#  longitude: !secret worklongitude
+#  icon: mdi:briefcase
 
 recorder:
   purge_keep_days: 10 
