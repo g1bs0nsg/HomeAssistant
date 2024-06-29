@@ -1,21 +1,4 @@
 # Triggers on google calendar event to give dogs medicine
-# - id: dogs_give_heatworm_flea_tick
-#   alias: Dogs - Give Heartworm/Flea/Tick
-#   initial_state: on
-#   trigger:
-#     platform: state
-#     entity_id: calendar.dogs
-#     to: 'on'
-#   action: 
-#     - service: !secret telservice
-#       data_template:
-#         message: "Did you give the dogs their medicine?"
-#         data:
-#           inline_keyboard: 'Yes:/dogsoff,Remind Me Later:/dogslater'
-#     - service: timer.start
-#       data:
-#         entity_id: timer.dogs
-#         duration: '00:30:00'
 - id: dogs_give_heatworm_flea_tick
   alias: Dogs - Give Heartworm/Flea/Tick
   initial_state: on

@@ -75,13 +75,6 @@ automation: !include_dir_merge_list automations/
 script: !include_dir_merge_named scripts/
 scene: !include scenes.yaml
 switch: !include switch.yaml
-#image_processing: !include image_processing.yaml
-
-#zone:
-#  - name: Work
-#  latitude: !secret worklatitude
-#  longitude: !secret worklongitude
-#  icon: mdi:briefcase
 
 recorder:
   purge_keep_days: 10 
@@ -125,11 +118,6 @@ rest_command:
   tasker_nfc_office:
     url: !secret arofficenfc
 
-# Calendar
-#google:
-#  client_id: !secret gc_client_id
-#  client_secret: !secret gc_client_secret
-
 # IFTTT
 ifttt:
   key: !secret iftttkey
@@ -154,89 +142,21 @@ input_select:
       - PS3
     initial: Select Activity
     icon: mdi:monitor
-  garage_hvac:
-    name: Fanspeed
-    options:
-      - ""
-      - "Auto"
-      - "1"
-      - "2"
-      - "3"
-      - "4"
-      - "5"
-      - "Quiet"
-    initial: ""
-    icon: mdi:fan
-  frontwindow:
-    name: Front Window LED
-    options:
-      - "Christmas"
-      - "Xmas"
-      - "Candy Cane"
-      - "Holly Jolly"
-      - "Valentine"
-      - "Lovey Day"
-      - "St Patty"
-      - "Easter"
-      - "USA"
-      - "Independence"
-      - "Halloween"
-      - "Punkin"
-      - "Thanksgiving"
-      - "Turkey Day"
-      - "BPM"
-      - "Confetti"
-      - "Cyclon Rainbow"
-      - "Dots"
-      - "Fire"
-      - "Glitter"
-      - "Juggle"
-      - "Lightning"
-      - "Police All"
-      - "Police One"
-      - "Rainbow"
-      - "Rainbow with Glitter"
-      - "Ripple"
-      - "Sinelon"
-      - "Solid"
-      - "Twinkle"
-    initial: "Solid"
 
 # Input booleans
 input_boolean:
   bedtime:
     name: bedtime
     initial: off
-  arm_daytime:
-    name: Daytime
-    initial: off
   guest:
     name: Guest Mode
     initial: off
-  door_open:
-    name: Door Open
-    initial: off
-  autolock:
-    name: Front Door Autolock
-    initial: on
   motion_alert:
     name: Motion Alert
     initial: on
-  garage_thermostat:
-    name: Garage Thermostat
-    initial: on
-  holiday_lights:
-    name: Holiday Lights
-    initial: off
 
 # Input Numbers
 input_number:
-  front_window_animation_speed:
-    name: Front Window Animation Speed
-    initial: 150
-    min: 1
-    max: 150
-    step: 10
 # Control volume for Front Entry google home
   murdok_radio:
     name: Volume
@@ -270,111 +190,3 @@ light:
   - platform: switch
     name: front_door_entry
     entity_id: switch.front_door_entry
-
-#MQTT Lights
-mqtt:
-# Back Flood Lights
-  light:
-    - name: "Back Flood Lights"
-      state_topic: "stat/back_flood/POWER"
-      command_topic: "cmnd/back_flood/POWER"
-      availability_topic: "tele/back_flood/LWT"
-      qos: 1
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      retain: false
-# Back Porch Light
-    - name: "Back Porch Light"
-      state_topic: "stat/back_porch/POWER"
-      command_topic: "cmnd/back_porch/POWER"
-      availability_topic: "tele/back_porch/LWT"
-      qos: 1
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      retain: false
-# Bug Zapper
-    - name: "Bug Zapper"
-      state_topic: "stat/bug_zapper/POWER"
-      command_topic: "cmnd/bug_zapper/POWER"
-      availability_topic: "tele/bug_zapper/LWT"
-      qos: 1
-      payload_on: "ON"
-      payload_off: "OFF"
-      payload_available: "Online"
-      payload_not_available: "Offline"
-      retain: false 
-# Front Window LED
-    - name: "Front Window"
-      command_topic: "study/frontwindow/setpower"
-      state_topic: "study/frontwindow/setpowerpub"
-      rgb_state_topic: "study/frontwindow/setcolorpub"
-      rgb_command_topic: "study/frontwindow/setcolor"
-      brightness_state_topic: "study/frontwindow/setbrightnesspub"
-      brightness_command_topic: "study/frontwindow/setbrightness"
-      optimistic: false
-
-# Alarm Envisalink
-envisalink:
-  host: !secret enhost
-  panel_type: DSC
-  user_name: !secret enuser
-  password: !secret enpass
-  code: !secret encode
-  port: 4025
-  evl_version: 4
-  keepalive_interval: 60
-  zonedump_interval: 30
-  panic_type: Police
-  partitions: 
-    01:
-      name: 'Home' 
-  zones:
-    01:
-      name: 'Front Door'
-      type: 'door'
-    02:
-      name: 'Back Door'
-      type: 'door'
-    03:
-      name: 'Garage Door'
-      type: 'door'
-    04:
-      name: 'Living Room Motion'
-      type: 'motion'
-    05:
-      name: 'Study Window 1'
-      type: 'window'
-    06:
-      name: 'Study Window 2'
-      type: 'window'
-    07:
-      name: 'Dining Room Window 1'
-      type: 'window'
-    08:
-      name: 'Dining Room Window 2'
-      type: 'window'
-    09:
-      name: 'Dining Room Window 3'
-      type: 'window'
-    10:
-      name: 'Back Door Window'
-      type: 'window'
-    11:
-      name: 'Work Room Window'
-      type: 'window'
-    12:
-      name: 'Guest Room Window'
-      type: 'window'
-    13:
-      name: 'Master Bedroom Window 1'
-      type: 'window'
-    14:
-      name: 'Master Bedroom Window 2'
-      type: 'window'
-    15:
-      name: 'Master Bathroom Window'
-      type: 'window'

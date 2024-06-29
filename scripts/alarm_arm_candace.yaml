@@ -1,9 +1,0 @@
-arm_daytime:
-  sequence:
-    - service: envisalink.alarm_keypress
-      entity_id: alarm_control_panel.home
-      data:
-        keypress: '*102#'
-    - delay: '00:00:03'
-    - service: alarm_control_panel.alarm_arm_home
-      entity_id: alarm_control_panel.home

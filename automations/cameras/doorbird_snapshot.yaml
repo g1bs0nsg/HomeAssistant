@@ -1,6 +1,6 @@
 - id: doorbird_snapshot
   alias: Doorbird Camera Snapshot
-  initial_state: on
+  initial_state: off
   trigger:
     - platform: mqtt
       topic: frigate/events

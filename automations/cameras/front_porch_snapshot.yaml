@@ -1,6 +1,6 @@
 - id: front_porch_snapshot
   alias: Front Porch Camera Snapshot
-  initial_state: on
+  initial_state: off
   trigger:
     - platform: mqtt
       topic: frigate/events
