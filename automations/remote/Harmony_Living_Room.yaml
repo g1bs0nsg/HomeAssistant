@@ -18,9 +18,9 @@
           {% if is_state('input_select.living_room_tv', 'Power Off') %}
             PowerOff
           {% elif is_state('input_select.living_room_tv', 'Watch TV') %} 
-            TV
+            Watch TV
           {% elif is_state('input_select.living_room_tv', 'Watch Roku') %}
-            Roku
+            Watch Roku
           {% elif is_state('input_select.living_room_tv', 'PS3') %}
             PS3
           {% else %}
