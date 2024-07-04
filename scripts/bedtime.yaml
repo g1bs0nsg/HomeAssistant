@@ -3,20 +3,13 @@ bedtime:
     - service: light.turn_on
       data_template:
         entity_id: 
-          - light.hallway
+          - light.livingroom
           - light.front_entry
-          - light.back_entry
+          - light.diningroom
         brightness: 1
-    - service: light.turn_on
-      data_template:
-        entity_id: light.pendant1
-        brightness: 1
-        transition: 15
-    - delay: '00:00:15'
+    - delay: '00:01:00'
     - service: light.turn_off
       entity_id:
-        - light.hallway
-        - light.back_entry
-        - light.back_porch_light
-        - light.back_flood_lights
-        - light.front_flood_lights
+        - light.livingroom
+        - light.front_entry
+        - light.diningroom
