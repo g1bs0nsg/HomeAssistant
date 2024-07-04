@@ -31,6 +31,8 @@ jobs:
     needs: [yamllint]
     runs-on: ubuntu-latest
     steps:
+      - name: Install libjpeg-turbo8-dev
+        run: sudo apt-get install -y libjpeg-turbo8-dev
       - name: Check out configuration from Github
         uses: actions/checkout@v4
       - name: Create empty custom components folder
