@@ -16,52 +16,39 @@
   action:                                                   
     - service: light.turn_on                                
       entity_id: 
-        - light.kitchen
         - light.front_entry
-        - light.front_door_entry
-        - light.back_entry
-        - light.hallway
+        - light.livingroom
+        - light.diningroom
       data:                                                 
         brightness_pct: 100                                 
-    - service: light.turn_on
-      entity_id: light.front_flood_lights
     - delay: '00:05:00'                                     
-    - service: light.turn_on                                
-      entity_id: light.kitchen                          
-      data:                                                 
-        brightness_pct: 50
-    - delay: '00:00:01'
     - service: light.turn_off
       entity_id:
         - light.front_entry
-        - light.front_door_entry
-        - light.back_entry
-        - light.hallway
-        - light.pendant2
-        - light.pendant3
+        - light.diningroom
     - service: light.turn_on
-      entity_id: light.pendant1
+      entity_id: light.livingroom
       data:
         brightness_pct: 1
-- id: Arrival_Exterior_Lights_On
-  initial_state: on
-  alias: Exterior Lights On - Arriving Home
-  trigger:
-    platform: state
-    entity_id: 
-      - !secret personentity1
-      - !secret personentity2
-    from: 'not_home'
-    to: 'home'
-  condition:
-    condition: state
-    entity_id: sun.sun
-    state: 'below_horizon'
-  action:
-    - service: light.turn_on
-      entity_id:
-        - light.front_flood_lights
-        - light.front_porch_light
-    - delay: '00:10:00'
-    - service: light.turn_off
-      entity_id: light.front_flood_lights
+#- id: Arrival_Exterior_Lights_On
+#  initial_state: on
+#  alias: Exterior Lights On - Arriving Home
+#  trigger:
+#    platform: state
+#    entity_id: 
+#      - !secret personentity1
+#      - !secret personentity2
+#    from: 'not_home'
+#    to: 'home'
+#  condition:
+#    condition: state
+#    entity_id: sun.sun
+#    state: 'below_horizon'
+#  action:
+#    - service: light.turn_on
+#      entity_id:
+#        - light.front_flood_lights
+#        - light.front_porch_light
+#    - delay: '00:10:00'
+#    - service: light.turn_off
+#      entity_id: light.front_flood_lights
