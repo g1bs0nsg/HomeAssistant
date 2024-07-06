@@ -2,4 +2,4 @@
   entities:
     light.livingroom:
       state: on
-      brightness: 1
+      brightness: 10

@@ -5,7 +5,7 @@ google_actions:
       - light.front_entry
       - light.livingroom
       - light.diningroom
-      - switch.dust_collector
+      - light.garagelights
   entity_config:
     light.front_entry:
       name: front entry
@@ -19,7 +19,7 @@ google_actions:
     input_boolean.bedtime:
       name: bedtime
       room: living room
-    switch.dust_collector:
-      name: dust collector
+    light.garagelights:
+      name: garage lights
       room: garage
 

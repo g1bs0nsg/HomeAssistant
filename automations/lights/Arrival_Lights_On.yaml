@@ -29,7 +29,7 @@
     - service: light.turn_on
       entity_id: light.livingroom
       data:
-        brightness_pct: 1
+        brightness_pct: 10
 #- id: Arrival_Exterior_Lights_On
 #  initial_state: on
 #  alias: Exterior Lights On - Arriving Home

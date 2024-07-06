@@ -1,9 +1,0 @@
-- id: DustCollector
-  alias: 'Dust Collector'
-  initial_state: on
-  trigger:
-    platform: event
-    event_type: dustcollector_toggle
-  action:
-    - service: switch.toggle
-      entity_id: switch.dust_collector
