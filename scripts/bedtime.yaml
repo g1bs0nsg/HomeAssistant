@@ -14,3 +14,4 @@ bedtime:
         - light.front_entry
         - light.diningroom
         - light.garagelights
+        - light.basement_workroom
