@@ -6,6 +6,7 @@ google_actions:
       - light.livingroom
       - light.diningroom
       - light.garagelights
+      - light.basement_workroom
   entity_config:
     light.front_entry:
       name: front entry
@@ -22,4 +23,6 @@ google_actions:
     light.garagelights:
       name: garage lights
       room: garage
-
+    light.basement_workroom:
+      name: basement workroom
+      room: Basement workroom
