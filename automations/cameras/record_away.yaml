@@ -1,0 +1,73 @@
+## Enable object detection/recording on Dog Camera 
+## when nobody is home
+- id: record_away
+  alias: Enable Recording
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: group.presence                           
+    from: 'home'                                        
+    to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: input_boolean.guest
+      state: 'off'
+  action:
+    - service: switch.turn_on
+      entity_id:
+        - switch.dog_cam_detect
+        - switch.dog_cam_motion
+        - switch.dog_cam_recordings
+        - switch.dog_cam_snapshots
+    - service: !secret telservice
+      data:
+        message: "Nobody is at home, enabling camera recording!"
+
+## Disable object detection/recording on Dog Camera
+## when someone returns home
+- id: record_stop
+  alias: Disable Recording
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id:
+      - !secret personentity1
+      - !secret personentity2                          
+    from: 'not_home'                                        
+    to: 'home'
+  action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.dog_cam_detect
+        - switch.dog_cam_motion
+        - switch.dog_cam_recordings
+        - switch.dog_cam_snapshots
+    - service: !secret telservice
+      data:
+        message: "Camera recording disabled."
+
+## Recording is turned on by default if Frigate restarts
+## check conditions and disable if met
+- id: record_frigate_restart
+  alias: Disable Recording on Frigate Restart
+  initial_state: on
+  trigger:
+    platform: state
+    entity_id: camera.dog_cam
+    from: 'unavailable'
+  condition:
+    condition: or
+    conditions:                                                
+      - condition: state
+        entity_id: !secret personentity1
+        state: 'home'
+      - condition: state
+        entity_id: !secret personentity2
+        state: 'home'
+  action:
+    - service: switch.turn_off
+      entity_id:
+        - switch.dog_cam_detect
+        - switch.dog_cam_motion
+        - switch.dog_cam_recordings
+        - switch.dog_cam_snapshots
