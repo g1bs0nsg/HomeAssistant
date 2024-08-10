@@ -29,12 +29,31 @@
   alias: Disable Recording
   initial_state: on
   trigger:
-    platform: state
-    entity_id:
-      - !secret personentity1
-      - !secret personentity2                          
-    from: 'not_home'                                        
-    to: 'home'
+    - platform: state
+      entity_id:
+        - !secret personentity1
+      from: 'not_home'                                        
+      to: 'home'
+    - platform: state
+      entity_id:
+        - !secret personentity2                          
+      from: 'not_home'                                        
+      to: 'home'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: switch.dog_cam_detect
+        state: 'on'
+      - condition: state
+        entity_id: switch.dog_cam_motion
+        state: 'on'
+      - condition: state
+        entity_id: switch.dog_cam_recordings
+        state: 'on'
+      - condition: state
+        entity_id: switch.dog_cam_snapshots
+        state: 'on'
   action:
     - service: switch.turn_off
       entity_id:
@@ -45,6 +64,8 @@
     - service: !secret telservice
       data:
         message: "Camera recording disabled."
+  mode: single
+  max_exceeded: silent
 
 ## Recording is turned on by default if Frigate restarts
 ## check conditions and disable if met
