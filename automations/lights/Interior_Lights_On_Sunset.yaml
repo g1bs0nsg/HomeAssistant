@@ -3,7 +3,7 @@
 
 - id: Interior_Lights_On_Sunset
   alias: Interior Lights On - Sunset
-  initial_state: on
+  initial_state: off
   trigger:
     - platform: sun
       event: sunset
@@ -24,8 +24,7 @@
         entity_id: input_boolean.guest
         state: 'off'
   action:
-    service: scene.turn_on
-    target:
-      entity_id: scene.lights_on_sunset
+    service: light.turn_on
     data:
-      transition: 900
+      entity_id: light.livingroom
+      brightness_pct: 1
