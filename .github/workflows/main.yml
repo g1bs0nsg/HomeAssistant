@@ -45,6 +45,8 @@ jobs:
           mv -v ./frigate/custom_components/* ./custom_components/
       - name: Move secrets.yaml
         run: mv fake_secrets.yaml secrets.yaml
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
