@@ -61,3 +61,5 @@ jobs:
         run: python -m homeassistant --version
       - name: Check Config
         run: python -m homeassistant --config . --script check_config
+        env:
+          UV_SYSTEM_PYTHON: 1
