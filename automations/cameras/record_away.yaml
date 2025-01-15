@@ -2,7 +2,7 @@
 ## when nobody is home
 - id: record_away
   alias: Enable Recording
-  initial_state: on
+  initial_state: off
   trigger:
     platform: state
     entity_id: group.presence                           
