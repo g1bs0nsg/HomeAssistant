@@ -1,0 +1,17 @@
+- trigger:
+    - platform: time_pattern
+      hours: /1
+    - platform: homeassistant
+      event: start
+  action:
+    - service: weather.get_forecasts
+      data:
+        type: daily
+      target:
+        entity_id: weather.home
+      response_variable: daily
+  sensor:
+    - name: overnight_low
+      unique_id: forecast_templow
+      state: "{{ daily['weather.home'].forecast[0].templow }}"
+      unit_of_measurement: °F
