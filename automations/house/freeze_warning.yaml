@@ -6,7 +6,7 @@
       event: sunset
   condition:
     - condition: numeric_state
-      entity_id: sensor.overnight_low_temp
+      entity_id: sensor.overnight_low
       below: 35
   action:
     - service: !secret telservice
