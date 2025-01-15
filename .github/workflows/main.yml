@@ -52,7 +52,7 @@ jobs:
       - name: Display Python version
         run: python -c "import sys; print(sys.version)"
       - name: Install Dependencies
-        run: python -m pip install --upgrade pip wheel mysqlclient colorlog
+        run: python -m pip install --upgrade pip wheel mysqlclient colorlog telegram mutagen pywemo pyfttt numpy
       - name: Allow uv to use the system Python by default
         run: echo "UV_SYSTEM_PYTHON=1" >> $GITHUB_ENV
         shell: bash
