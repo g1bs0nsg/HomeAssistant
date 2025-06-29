@@ -3,7 +3,7 @@ google_actions:
     include_entities:
       - input_boolean.bedtime
       - light.front_entry
-      - light.livingroom
+      - light.livingroom_lights
       - light.diningroom
       - light.garagelights
       - light.basement_workroom
