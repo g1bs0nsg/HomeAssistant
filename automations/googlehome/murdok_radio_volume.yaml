@@ -6,6 +6,6 @@
   action:
     - service: media_player.volume_set
       data_template:
-        entity_id: media_player.googlehome_dogs
+        entity_id: media_player.googlehome_living_room
         volume_level: >
           {{ states('input_number.murdok_radio') }}
