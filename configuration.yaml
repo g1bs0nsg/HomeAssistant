@@ -133,6 +133,7 @@ timer:
   trash:
   dogs:
   medicine:
+  hvacfilter:
 
 # Input Selects
 input_select:
