@@ -43,7 +43,6 @@ jobs:
       - name: Run Home Asisstant Configuration Check
         uses: frenck/action-home-assistant@v1.4.1
         with:
-          path: "./config"
           secrets: fake_secrets.yaml
           version: stable
 
