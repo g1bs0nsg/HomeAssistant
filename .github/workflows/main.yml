@@ -40,53 +40,14 @@ jobs:
         run: |
           git clone https://github.com/blakeblackshear/frigate-hass-integration.git frigate
           mv -v ./frigate/custom_components/* ./custom_components/
+          rm -rf ./frigate
       - name: Clone custom component midea_ac_lan
         run: |
           git clone https://github.com/wuwentao/midea_ac_lan.git midea_ac_lan
           mv -v ./midea_ac_lan/custom_components/* ./custom_components/
-      - name: List folder contents
-        run: ls -alh .
+          rm -rf ./midea_ac_lan
       - name: Run Home Asisstant Configuration Check
         uses: frenck/action-home-assistant@v1.4.1
         with:
           secrets: fake_secrets.yaml
           version: stable
-
-  # build:
-  #   name: Build Test Environment
-  #   needs: [yamllint]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Update apt cache
-  #       run: sudo apt-get update
-  #     - name: Install libturbojpeg and libturbojpeg0-dev
-  #       run: sudo apt-get install -y libturbojpeg libturbojpeg0-dev
-  #     - name: Check out configuration from Github
-  #       uses: actions/checkout@v4
-  #     - name: Create empty custom components folder
-  #       run: |
-  #         if [ -d "custom_components" ]; then rm -rf custom_components; fi
-  #         mkdir -p ./custom_components
-  #     - name: Clone custom component frigate
-  #       run: |
-  #         git clone https://github.com/blakeblackshear/frigate-hass-integration.git frigate
-  #         mv -v ./frigate/custom_components/* ./custom_components/
-  #     - name: Move secrets.yaml
-  #       run: mv fake_secrets.yaml secrets.yaml
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: '3.13'
-  #     - name: Display Python version
-  #       run: python -c "import sys; print(sys.version)"
-  #     - name: Install Dependencies
-  #       run: python -m pip install --upgrade pip wheel mysqlclient colorlog
-  #     - name: Allow uv to use the system Python by default
-  #       run: echo "UV_SYSTEM_PYTHON=1" >> $GITHUB_ENV
-  #       shell: bash
-  #     - name: Install Home Assistant
-  #       run: python -m pip install homeassistant==2025.5.3
-  #     - name: Home Assistant Version
-  #       run: python -m homeassistant --version
-  #     - name: Check Config
-  #       run: python -m homeassistant --config . --script check_config
