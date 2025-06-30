@@ -40,6 +40,12 @@ jobs:
         run: |
           git clone https://github.com/blakeblackshear/frigate-hass-integration.git frigate
           mv -v ./frigate/custom_components/* ./custom_components/
+      - name: Clone custom component midea_ac_lan
+        run: |
+          git clone https://github.com/wuwentao/midea_ac_lan.git midea_ac_lan
+          mv -v ./midea_ac_lan/custom_components/* ./custom_components/
+      - name: List folder contents
+        run: ls -alh .
       - name: Run Home Asisstant Configuration Check
         uses: frenck/action-home-assistant@v1.4.1
         with:
