@@ -34,7 +34,7 @@ jobs:
       - name: Install libturbojpeg and libturbojpeg0-dev
         run: sudo apt-get install -y libturbojpeg libturbojpeg0-dev
       - name: Install bluez and libbluetooth-dev
-        run: sudo apt-get install -y bluez libbluetooth-dev
+        run: sudo apt-get install -y bluez=5.79 libbluetooth-dev=5.79
       - name: Check out configuration from Github
         uses: actions/checkout@v4
       - name: Create empty custom components folder
