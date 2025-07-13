@@ -1,10 +1,10 @@
 - alias: "Murdok Radio Volume Control"
   initial_state: on
   trigger:
-    platform: state
+    trigger: state
     entity_id: input_number.murdok_radio
   action:
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       data_template:
         entity_id: media_player.googlehome_living_room
         volume_level: >

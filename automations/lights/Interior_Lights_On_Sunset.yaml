@@ -4,13 +4,13 @@
 - id: Interior_Lights_On_Sunset
   alias: Interior Lights On - Sunset
   initial_state: off
-  trigger:
-    - platform: sun
+  triggers:
+    - trigger: sun
       event: sunset
       offset: "-00:45:00"
-    - platform: state
+    - trigger: state
       entity_id: group.presence
-      to: 'home'
+      to: "home"
   condition:
     condition: and
     conditions:
@@ -19,12 +19,12 @@
         after_offset: "-00:45:00"
       - condition: state
         entity_id: group.presence
-        state: 'home'
+        state: "home"
       - condition: state
         entity_id: input_boolean.guest
-        state: 'off'
+        state: "off"
   action:
-    service: light.turn_on
+    action: light.turn_on
     data:
-      entity_id: light.livingroom
+      entity_id: light.livingroom_lights
       brightness_pct: 1

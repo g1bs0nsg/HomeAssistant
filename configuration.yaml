@@ -8,7 +8,7 @@ homeassistant:
   elevation: !secret elevation
   # metric for Metric, imperial for Imperial
   unit_system: us_customary
-  # Pick timezone from here: 
+  # Pick timezone from here:
   # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone
   currency: USD
@@ -81,7 +81,7 @@ switch: !include switch.yaml
 template: !include template.yaml
 
 recorder:
-  purge_keep_days: 10 
+  purge_keep_days: 10
   db_url: !secret db_url
   exclude:
     entities:
@@ -104,13 +104,6 @@ person:
     id: !secret person2id
     device_trackers:
       - !secret person2device1
-
-# Telegram Configuration
-telegram_bot:
-  - platform: polling
-    api_key: !secret tapikey
-    allowed_chat_ids:
-      - !secret tchatid1
 
 # Notifications
 notify:
@@ -162,14 +155,13 @@ input_boolean:
 
 # Input Numbers
 input_number:
-# Control volume for Front Entry google home
+  # Control volume for Front Entry google home
   murdok_radio:
     name: Volume
     icon: mdi:volume-high
     min: 0
     max: 1
     step: 0.05
-
 # light:
 # # Make zwave switches show as lights instead
 #   - platform: switch

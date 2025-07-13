@@ -2,26 +2,26 @@
   alias: Double Take Facial Recognition
   initial_state: on
   trigger:
-    - platform: state
+    - trigger: state
       entity_id: sensor.double_take_britt
   condition:
     - condition: and
       conditions:
         - condition: state
           entity_id: input_boolean.motion_alert
-          state: 'on'
+          state: "on"
         - condition: state
           entity_id: input_boolean.autolock
-          state: 'on'
+          state: "on"
         - condition: state
           entity_id: binary_sensor.front_door
-          state: 'off'
+          state: "off"
         - condition: template
           value_template: "{{ not (now() - states.binary_sensor.front_door.last_changed).total_seconds() < 30 }}"
     - condition: template
-      value_template: '{{ trigger.to_state.attributes.id != trigger.from_state.attributes.id }}'
+      value_template: "{{ trigger.to_state.attributes.id != trigger.from_state.attributes.id }}"
   action:
-    - service: telegram_bot.send_photo
+    - action: telegram_bot.send_photo
       data:
         url: >-
           http://frigate.sky.net:3000/api/storage/matches/{{ trigger.to_state.attributes.match.filename }}?box=true

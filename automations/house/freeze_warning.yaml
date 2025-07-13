@@ -2,13 +2,13 @@
   alias: Freeze Warning
   initial_state: on
   trigger:
-    - platform: sun
+    - trigger: sun
       event: sunset
   condition:
     - condition: numeric_state
       entity_id: sensor.overnight_low
       below: 35
   action:
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "Freeze warning, cover outside spigots!"

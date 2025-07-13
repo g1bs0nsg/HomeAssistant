@@ -4,14 +4,14 @@
   alias: Exterior Lights On - Sunset
   initial_state: on
   trigger:
-    - platform: sun
+    - trigger: sun
       event: sunset
   condition:
     condition: state
     entity_id: group.presence
-    state: 'home'
+    state: "home"
   action:
-    - service: light.turn_on
+    - action: light.turn_on
       data:
         entity_id:
           - light.front_porch_light

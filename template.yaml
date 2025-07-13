@@ -1,10 +1,10 @@
 - trigger:
-    - platform: time_pattern
+    - trigger: time_pattern
       hours: /1
-    - platform: homeassistant
+    - trigger: homeassistant
       event: start
   action:
-    - service: weather.get_forecasts
+    - action: weather.get_forecasts
       data:
         type: daily
       target:

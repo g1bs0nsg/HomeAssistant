@@ -1,13 +1,13 @@
 - id: Hass_Update_Available
-  alias: 'Home Assistant Update Available'
+  alias: "Home Assistant Update Available"
   initial_state: on
   trigger:
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.home_assistant_website_update_available
       from: "off"
       to: "on"
   action:
-    - service: !secret telservice
+    - action: !secret telservice
       data_template:
         message: >
           {% set HassVer = states('sensor.home_assistant_website') %}

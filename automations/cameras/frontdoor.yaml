@@ -2,12 +2,12 @@
   alias: Doorbird IR On at Night
   initial_state: off
   trigger:
-    - platform: time_pattern
+    - trigger: time_pattern
       minutes: /2
   condition:
     condition: state
     entity_id: sun.sun
-    state: 'below_horizon'
+    state: "below_horizon"
   action:
-    service: button.press
+    action: button.press
     entity_id: button.frontdoor_ir

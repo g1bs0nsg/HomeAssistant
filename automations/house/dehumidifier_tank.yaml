@@ -2,10 +2,10 @@
   alias: Basement Dehumidifier Tank Full
   initial_state: on
   trigger:
-    platform: state
+    trigger: state
     entity_id: binary_sensor.151732606083492_tank_full
-    from: 'off'
-    to: 'on'
+    from: "off"
+    to: "on"
   action:
     - service: !secret telservice
       data:
@@ -15,9 +15,9 @@
   alias: Basement Dehumidifer Tank Warning
   initial_state: on
   trigger:
-    platform: numeric_state
+    trigger: numeric_state
     entity_id: sensor.151732606083492_tank
-    above: 75
+    above: 50
   action:
     - service: !secret telservice
       data:

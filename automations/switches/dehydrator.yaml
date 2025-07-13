@@ -4,15 +4,15 @@
   alias: "Dehydrator On"
   initial_state: on
   trigger:
-    - platform: state
+    - trigger: state
       entity_id: switch.dehydrator
-      from: 'off'
-      to: 'on'
+      from: "off"
+      to: "on"
   action:
-    - service: timer.start
+    - action: timer.start
       data:
         entity_id: timer.dehydrator
-        duration: '07:00:00'
+        duration: "07:00:00"
 - id: dehydrator_reset
   alias: "Dehydrator Reset"
   initial_state: on
@@ -21,106 +21,106 @@
     conditions:
       - condition: state
         entity_id: timer.dehydrator
-        state: 'active'
+        state: "active"
       - condition: state
         entity_id: switch.dehydrator
-        state: 'unavailable'
-  trigger:
-    - platform: state
+        state: "unavailable"
+  triggers:
+    - trigger: state
       entity_id: switch.dehydrator
-      from: 'on'
-      to: 'off'
-    - platform: state
+      from: "on"
+      to: "off"
+    - trigger: state
       entity_id: switch.dehydrator
-      to: 'unavailable'
-  action:
-    - service: timer.cancel
+      to: "unavailable"
+  actions:
+    - action: timer.cancel
       entity_id: timer.dehydrator
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "Something has gone wrong, check the dehydrator"
 - id: dehydrator_timer_failed
   alias: Dehydrator Timer Failed
   initial_state: on
   trigger:
-    - platform: state
+    - trigger: state
       entity_id: timer.dehydrator
-      to: 'idle'
+      to: "idle"
       for:
         minutes: 1
   condition:
     condition: state
     entity_id: switch.dehydrator
-    state: 'on'
+    state: "on"
   action:
-    - service: !secret telservice
+    - action: !secret telservice
       data_template:
         message: "Dehydator timer has failed, it is now idle but dehydrator is still powered on.  Shut it down?"
         data:
-            inline_keyboard:
-              - 'Yes:/dehydratoroff,No:/removekeyboarddehydrator'
+          inline_keyboard:
+            - "Yes:/dehydratoroff,No:/removekeyboarddehydrator"
 - id: dehydrator_timer_done
   alias: "Ding! Jerky Timer Done"
   initial_state: on
   trigger:
-    - platform: event 
+    - trigger: event
       event_type: timer.finished
       event_data:
         entity_id: timer.dehydrator
-  action:
-    - service: !secret telservice
+  actions:
+    - action: !secret telservice
       data_template:
         message: "Timer has expired and dehydator has been powered off.  Is the Jerky done?"
         data:
-            inline_keyboard:
-              - 'Give it another hour:/dehydratorextend,Yes:/removekeyboarddehydrator'
-    - service: switch.turn_off
+          inline_keyboard:
+            - "Give it another hour:/dehydratorextend,Yes:/removekeyboarddehydrator"
+    - action: switch.turn_off
       entity_id: switch.dehydrator
 - id: acknowledge_dehydrator_alert
   alias: "Acknowledge Dehydrator Alert"
   initial_state: on
   trigger:
-    platform: event
+    trigger: event
     event_type: telegram_callback
     event_data:
-      data: '/removekeyboarddehydrator'
-  action:
-    - service: telegram_bot.answer_callback_query       
-      data_template:         
-        callback_query_id: '{{ trigger.event.data.id }}'         
-        message: 'Great, no further action needed then.'
-    - service: notify.britt_ha_notifybot
-      data:
-        message: 'Great, no further action needed then.'
-    - service: telegram_bot.edit_replymarkup
+      data: "/removekeyboarddehydrator"
+  actions:
+    - action: telegram_bot.answer_callback_query
       data_template:
-        message_id: '{{ trigger.event.data.message.message_id }}'
-        chat_id: '{{ trigger.event.data.chat_id }}'
+        callback_query_id: "{{ trigger.event.data.id }}"
+        message: "Great, no further action needed then."
+    - action: notify.britt_ha_notifybot
+      data:
+        message: "Great, no further action needed then."
+    - action: telegram_bot.edit_replymarkup
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
         inline_keyboard: []
 - id: extend_dehydrator_time
   alias: "Extend Dehydrator Timer"
   initial_state: on
   trigger:
-    platform: event
+    trigger: event
     event_type: telegram_callback
     event_data:
-      data: '/dehydratorextend'
-  action:
-    - service: telegram_bot.answer_callback_query       
-      data_template:         
-        callback_query_id: '{{ trigger.event.data.id }}'         
-        message: 'Ok, timer extended 1 hour and dehydrator powered back on.'
-    - service: !secret telservice
-      data:
-        message: 'Ok, timer extended 1 hour and dehydrator powered back on.'
-    - service: telegram_bot.edit_replymarkup
+      data: "/dehydratorextend"
+  actions:
+    - action: telegram_bot.answer_callback_query
       data_template:
-        message_id: '{{ trigger.event.data.message.message_id }}'
-        chat_id: '{{ trigger.event.data.chat_id }}'
+        callback_query_id: "{{ trigger.event.data.id }}"
+        message: "Ok, timer extended 1 hour and dehydrator powered back on."
+    - action: !secret telservice
+      data:
+        message: "Ok, timer extended 1 hour and dehydrator powered back on."
+    - action: telegram_bot.edit_replymarkup
+      data_template:
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
         inline_keyboard: []
-    - service: switch.turn_on
+    - action: switch.turn_on
       entity_id: switch.dehydrator
-    - service: timer.start
+    - action: timer.start
       data:
         entity_id: timer.dehydrator
-        duration: '01:00:00'
+        duration: "01:00:00"

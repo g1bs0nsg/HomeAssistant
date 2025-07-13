@@ -3,22 +3,22 @@
   alias: Put out the trash
   initial_state: on
   trigger:
-    - platform: calendar
+    - trigger: calendar
       entity_id: calendar.trefynwed_gmail_com
       event: start
   condition:
     - condition: template
       value_template: "{{ 'Put out the trash' in trigger.calendar_event.summary }}"
-  action: 
-    - service: !secret telservice
+  actions:
+    - action: !secret telservice
       data_template:
         message: "Did you put out the trash?"
         data:
-          inline_keyboard: 'Yes:/trashoff'
-    - service: timer.start
+          inline_keyboard: "Yes:/trashoff"
+    - action: timer.start
       data:
         entity_id: timer.trash
-        duration: '00:30:00'
+        duration: "00:30:00"
   mode: queued
 
 # Handle the telegram response for yes
@@ -26,21 +26,21 @@
   alias: Trash put out
   initial_state: on
   trigger:
-    platform: event
+    trigger: event
     event_type: telegram_callback
     event_data:
-      data: '/trashoff'
-  action:
-    - service: telegram_bot.answer_callback_query
+      data: "/trashoff"
+  actions:
+    - action: telegram_bot.answer_callback_query
       data_template:
-        callback_query_id: '{{ trigger.event.data.id }}'
-        message: 'Ok, trash reminder acknowledged'
-    - service: telegram_bot.edit_replymarkup
+        callback_query_id: "{{ trigger.event.data.id }}"
+        message: "Ok, trash reminder acknowledged"
+    - action: telegram_bot.edit_replymarkup
       data_template:
-        message_id: '{{ trigger.event.data.message.message_id }}'
-        chat_id: '{{ trigger.event.data.chat_id }}'
+        message_id: "{{ trigger.event.data.message.message_id }}"
+        chat_id: "{{ trigger.event.data.chat_id }}"
         inline_keyboard: []
-    - service: timer.cancel
+    - action: timer.cancel
       entity_id: timer.trash
 
 # Fire the notification again if the timer finishes
@@ -48,17 +48,17 @@
   alias: Repeat Put Out Trash
   initial_state: on
   trigger:
-    platform: event
+    trigger: event
     event_type: timer.finished
     event_data:
       entity_id: timer.trash
-  action:
-    - service: !secret telservice
+  actions:
+    - action: !secret telservice
       data_template:
         message: "Did you put out the trash?"
         data:
-            inline_keyboard: 'Yes:/trashoff'
-    - service: timer.start
+          inline_keyboard: "Yes:/trashoff"
+    - action: timer.start
       data:
         entity_id: timer.trash
-        duration: '00:30:00'
+        duration: "00:30:00"

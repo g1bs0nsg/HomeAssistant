@@ -2,12 +2,12 @@
   alias: 3D Print Done
   initial_state: on
   trigger:
-    platform: state
+    trigger: state
     entity_id: binary_sensor.octoprint_printing
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
   action:
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "3D Print Complete!"
 
@@ -15,10 +15,10 @@
   alias: 3D Printer Power Off After Print Finishes
   initial_state: on
   trigger:
-    platform: state
+    trigger: state
     entity_id: binary_sensor.octoprint_printing
-    from: 'on'
-    to: 'off'
+    from: "on"
+    to: "off"
     for:
       minutes: 20
   condition:
@@ -27,10 +27,10 @@
       - sensor.octoprint_actual_bed_temp
       - sensor.octoprint_actual_tool0_temp
     below: 60
-  action:
-    - service: switch.turn_off
+  actions:
+    - action: switch.turn_off
       entity_id: switch.3d_printer
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "3D Printer has been idle for 20 minutes and is completely cooled down, powering off!"
 
@@ -38,9 +38,9 @@
   alias: 3D Printer Idle Power Off
   initial_state: on
   trigger:
-    platform: state
+    trigger: state
     entity_id: switch.3d_printer
-    to: 'on'
+    to: "on"
     for:
       minutes: 30
   condition:
@@ -48,11 +48,11 @@
     conditions:
       - condition: state
         entity_id: binary_sensor.octoprint_printing
-        state: 'on'
-  action:
-    - service: switch.turn_off
+        state: "on"
+  actions:
+    - action: switch.turn_off
       entity_id: switch.3d_printer
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "3D Printer has been idle for 30 minutes, shutting down!"
 
@@ -60,11 +60,10 @@
   alias: 3D Printer Error
   initial_state: on
   trigger:
-    platform: state
+    trigger: state
     entity_id: binary_sensor.octoprint_printing_error
-    to: 'on'
+    to: "on"
   action:
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "3D Printer has experienced an error and requires your attention!"
-

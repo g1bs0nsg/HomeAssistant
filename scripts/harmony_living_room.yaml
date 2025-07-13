@@ -1,61 +1,61 @@
 tv:
   sequence:
-    - service: remote.turn_on
+    - action: remote.turn_on
       data:
         entity_id: remote.living_room
         activity: "52679239"
 tvoff:
   sequence:
-    - service: remote.turn_on
+    - action: remote.turn_on
       data:
         entity_id: remote.living_room
         activity: "-1"
 roku:
   sequence:
-    - service: remote.turn_on
+    - action: remote.turn_on
       data:
         entity_id: remote.living_room
         activity: "52679239"
 ps3:
   sequence:
-    - service: remote.turn_on
+    - action: remote.turn_on
       data:
         entity_id: remote.living_room
         activity: "3912295"
 netflix:
   sequence:
-    - service: remote.turn_on
+    - action: remote.turn_on
       data:
         entity_id: remote.living_room
         activity: "41301691"
-    - service: media_player.select_source
+    - action: media_player.select_source
       data:
         entity_id: media_player.roku_living_room
         source: 12
 plex:
   sequence:
-    - service: remote.turn_on
+    - action: remote.turn_on
       data:
         entity_id: remote.living_room
         activity: "41301691"
-    - service: media_player.select_source
+    - action: media_player.select_source
       data:
         entity_id: media_player.roku_living_room
         source: 13535
 amazon:
   sequence:
-    - service: remote.turn_on
+    - action: remote.turn_on
       data:
         entity_id: remote.living_room
         activity: "41301691"
-    - service: media_player.select_source
+    - action: media_player.select_source
       data:
         entity_id: media_player.roku_living_room
         source: 13
 volumeup:
   alias: Volume Up
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       data:
         entity_id: remote.living_room
         device: 51087977
@@ -65,7 +65,7 @@ volumeup:
 volumedown:
   alias: Volume Down
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       data:
         entity_id: remote.living_room
         device: 51087977
@@ -75,7 +75,7 @@ volumedown:
 pause:
   alias: Pause
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       data_template:
         entity_id: remote.living_room
         command: Pause
@@ -91,7 +91,7 @@ pause:
 play:
   alias: Play
   sequence:
-    - service: remote.send_command
+    - action: remote.send_command
       data_template:
         entity_id: remote.living_room
         command: Play

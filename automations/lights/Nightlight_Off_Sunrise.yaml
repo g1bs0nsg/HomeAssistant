@@ -4,31 +4,31 @@
   alias: Nightlight Off - Sunrise
   initial_state: on
   trigger:
-    platform: sun
+    trigger: sun
     event: sunrise
-    offset: '+00:45:00'
-  condition: 
+    offset: "+00:45:00"
+  condition:
     - condition: state
       entity_id: input_boolean.guest
-      state: 'off'
+      state: "off"
   action:
-    service: light.turn_off
+    action: light.turn_off
     data:
       entity_id:
         - light.front_entry
-        - light.livingroom
+        - light.livingroom_lights
         - light.diningroom
 
 - id: Nightlight_Off_Time
   alias: Nightlight Off - Time
   initial_state: on
   trigger:
-    platform: time
+    trigger: time
     at: "10:00:00"
   action:
-    service: light.turn_off
+    action: light.turn_off
     data:
       entity_id:
-        - light.livingroom
+        - light.livingroom_lights
         - light.front_entry
         - light.diningroom

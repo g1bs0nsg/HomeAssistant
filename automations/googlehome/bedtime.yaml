@@ -1,16 +1,16 @@
 - alias: Bedtime
   initial_state: on
   trigger:
-    - platform: state
+    - trigger: state
       entity_id: input_boolean.bedtime
-      to: 'on'
+      to: "on"
   condition:
     condition: state
     entity_id: input_boolean.guest
-    state: 'off'
-  action:
-    - service: script.turn_on
+    state: "off"
+  actions:
+    - action: script.turn_on
       entity_id: script.bedtime
-    - delay: '00:00:05'
-    - service: input_boolean.turn_off
+    - delay: "00:00:05"
+    - action: input_boolean.turn_off
       entity_id: input_boolean.bedtime

@@ -1,25 +1,25 @@
-## Enable object detection/recording on Dog Camera 
+## Enable object detection/recording on Dog Camera
 ## when nobody is home
 - id: record_away
   alias: Enable Recording
   initial_state: off
   trigger:
-    platform: state
-    entity_id: group.presence                           
-    from: 'home'                                        
-    to: 'not_home'
+    trigger: state
+    entity_id: group.presence
+    from: "home"
+    to: "not_home"
   condition:
     - condition: state
       entity_id: input_boolean.guest
-      state: 'off'
-  action:
-    - service: switch.turn_on
+      state: "off"
+  actions:
+    - action: switch.turn_on
       entity_id:
         - switch.dog_cam_detect
         - switch.dog_cam_motion
         - switch.dog_cam_recordings
         - switch.dog_cam_snapshots
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "Nobody is at home, enabling camera recording!"
 
@@ -28,40 +28,40 @@
 - id: record_stop
   alias: Disable Recording
   initial_state: on
-  trigger:
-    - platform: state
+  triggers:
+    - trigger: state
       entity_id:
         - !secret personentity1
-      from: 'not_home'                                        
-      to: 'home'
-    - platform: state
+      from: "not_home"
+      to: "home"
+    - trigger: state
       entity_id:
-        - !secret personentity2                          
-      from: 'not_home'                                        
-      to: 'home'
+        - !secret personentity2
+      from: "not_home"
+      to: "home"
   condition:
     condition: or
     conditions:
       - condition: state
         entity_id: switch.dog_cam_detect
-        state: 'on'
+        state: "on"
       - condition: state
         entity_id: switch.dog_cam_motion
-        state: 'on'
+        state: "on"
       - condition: state
         entity_id: switch.dog_cam_recordings
-        state: 'on'
+        state: "on"
       - condition: state
         entity_id: switch.dog_cam_snapshots
-        state: 'on'
-  action:
-    - service: switch.turn_off
+        state: "on"
+  actions:
+    - action: switch.turn_off
       entity_id:
         - switch.dog_cam_detect
         - switch.dog_cam_motion
         - switch.dog_cam_recordings
         - switch.dog_cam_snapshots
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "Camera recording disabled."
   mode: single
@@ -73,20 +73,20 @@
   alias: Disable Recording on Frigate Restart
   initial_state: on
   trigger:
-    platform: state
+    trigger: state
     entity_id: camera.dog_cam
-    from: 'unavailable'
+    from: "unavailable"
   condition:
     condition: or
-    conditions:                                                
+    conditions:
       - condition: state
         entity_id: !secret personentity1
-        state: 'home'
+        state: "home"
       - condition: state
         entity_id: !secret personentity2
-        state: 'home'
+        state: "home"
   action:
-    - service: switch.turn_off
+    - action: switch.turn_off
       entity_id:
         - switch.dog_cam_detect
         - switch.dog_cam_motion

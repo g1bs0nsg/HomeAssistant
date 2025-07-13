@@ -2,17 +2,17 @@
   alias: Front Porch Camera Snapshot
   initial_state: off
   trigger:
-    - platform: mqtt
+    - trigger: mqtt
       topic: frigate/events
       id: frigate-event-frontporch
-      payload: 'front_porch'
-      value_template: "{{ value_json[\"after\"][\"camera\"] }}"
+      payload: "front_porch"
+      value_template: '{{ value_json["after"]["camera"] }}'
       variables:
-        after_zones: "{{ trigger.payload_json[\"after\"][\"entered_zones\"] }}"
-        before_zones: "{{ trigger.payload_json[\"before\"][\"entered_zones\"] }}"
-        camera: "{{ trigger.payload_json[\"after\"][\"camera\"] }}"
-        id: "{{ trigger.payload_json[\"after\"][\"id\"] }}"
-        label: "{{ trigger.payload_json[\"after\"][\"label\"] }}"
+        after_zones: '{{ trigger.payload_json["after"]["entered_zones"] }}'
+        before_zones: '{{ trigger.payload_json["before"]["entered_zones"] }}'
+        camera: '{{ trigger.payload_json["after"]["camera"] }}'
+        id: '{{ trigger.payload_json["after"]["id"] }}'
+        label: '{{ trigger.payload_json["after"]["label"] }}'
   condition:
     - condition: or
       conditions:
@@ -24,28 +24,28 @@
       conditions:
         - condition: state
           entity_id: input_boolean.motion_alert
-          state: 'on'
+          state: "on"
         - condition: state
           entity_id: input_boolean.autolock
-          state: 'on'
+          state: "on"
         - condition: state
           entity_id: binary_sensor.front_door
-          state: 'off'
+          state: "off"
         - condition: template
           value_template: "{{ not (now() - states.binary_sensor.front_door.last_changed).total_seconds() < 30 }}"
     - condition: template
       value_template: >-
         {{ ["dbperson", "fpoverhead"]|select("in", trigger.payload_json["after"]["entered_zones"])|list|length > 0 }}
-  action:
-    - service: telegram_bot.send_photo
+  actions:
+    - action: telegram_bot.send_photo
       data:
         url: >-
           http://hass.sky.net:8123/api/frigate/notifications/{{ id }}/thumbnail.jpg
         caption: >
           {{ label | title }} detected by {{ camera | replace("_", " ") | title }}
         target: !secret tchatid1
-    - delay: '00:00:30'
-    - service: telegram_bot.send_video
+    - delay: "00:00:30"
+    - action: telegram_bot.send_video
       data:
         url: >-
           http://hass.sky.net:8123/api/frigate/notifications/{{ id }}/{{ camera }}/clip.mp4
@@ -56,7 +56,7 @@
       value_template: "{{ not (now() - states.automation.doorbird_ring.attributes.last_triggered).total_seconds() < 60 }}"
     - condition: template
       value_template: "{{ not (now() - states.script.motion_alert.attributes.last_triggered).total_seconds() < 60 }}"
-    - service: script.turn_on
+    - action: script.turn_on
       entity_id: script.motion_alert
   mode: single
   max_exceeded: silent

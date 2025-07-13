@@ -1,28 +1,27 @@
 doorbell:
   sequence:
     - condition: time
-      before: '8:00:00'
-      after: '10:00:00'
-    - service: media_player.volume_set
+      before: "8:00:00"
+      after: "10:00:00"
+    - action: media_player.volume_set
       data:
         entity_id: group.all_googlehomes
         volume_level: 0.01
-    - service: media_player.turn_off
-      data:
-        entity_id: group.all_googlehomes 
-    - delay: 00:00:01
-    - service: media_player.turn_on
+    - action: media_player.turn_off
       data:
         entity_id: group.all_googlehomes
     - delay: 00:00:01
-    - service: media_player.play_media
+    - action: media_player.turn_on
+      data:
+        entity_id: group.all_googlehomes
+    - delay: 00:00:01
+    - action: media_player.play_media
       data:
         entity_id: group.all_googlehomes
         media_content_id: http://192.168.0.240:8123/local/mp3/doorbell.mp3
         media_content_type: audio/mp3
     - delay: 00:00:01
-    - service: media_player.volume_set
+    - action: media_player.volume_set
       data:
         entity_id: group.all_googlehomes
         volume_level: 0.7
-

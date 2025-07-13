@@ -1,5 +1,5 @@
 - name: lights_on_sunset
   entities:
-    light.livingroom:
-      state: on
+    light.livingroom_lights:
+      state: "on"
       brightness: 10

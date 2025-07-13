@@ -1,8 +1,8 @@
 - id: Doorbird Ring
   alias: Doorbird_Ring
   trigger:
-    platform: event
+    trigger: event
     event_type: doorbird_frontdoor_button_press
   action:
-    - service: script.turn_on
-      entity_id: script.doorbell 
+    - action: script.turn_on
+      entity_id: script.doorbell
