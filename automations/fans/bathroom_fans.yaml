@@ -1,0 +1,29 @@
+# Turn off bathroom vent fans automatically
+
+- id: Hall_Bath_Fan
+  initial_state: on
+  alias: Hallway Bath Fan - Auto off
+  trigger:
+    trigger: state
+    entity_id: switch.hwallway_bath_fan
+    from: "off"
+    to: "on"
+  actions:
+    - delay: "02:00:00"
+    - action: switch.turn_off
+      entity_id:
+        - switch.hallway_bath_fan
+
+- id: Basement_Bath_Fan
+  initial_state: on
+  alias: Basement Bath Fan - Auto off
+  trigger:
+    trigger: state
+    entity_id: switch.basement_bath_fan
+    from: "off"
+    to: "on"
+  actions:
+    - delay: "01:00:00"
+    - action: switch.turn_off
+      entity_id:
+        - switch.basement_bath_fan
