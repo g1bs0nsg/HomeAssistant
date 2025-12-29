@@ -5,7 +5,7 @@
   alias: Hallway Bath Fan - Auto off
   trigger:
     trigger: state
-    entity_id: switch.hwallway_bath_fan
+    entity_id: switch.hallway_bath_fan
     from: "off"
     to: "on"
   actions:

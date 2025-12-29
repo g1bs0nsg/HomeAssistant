@@ -50,9 +50,9 @@
         - action: switch.turn_on
           entity_id: switch.3d_printer_power
         - action: switch.turn_on
-          entity_id: switch.garage_light_switch
+          entity_id: switch.3d_printer_lamp
       turn_off:
         - action: switch.turn_off
           entity_id: switch.3d_printer_power
         - action: switch.turn_off
-          entity_id: switch.garage_light_switch
+          entity_id: switch.3d_printer_lamp
