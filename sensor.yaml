@@ -1,30 +1,30 @@
 # Harmony Remote Living Room
-- platform: template
-  sensors:
-    living_room:
-      value_template: >-
-        {% set activity = states.remote.living_room.attributes.current_activity %}
-        {% if activity == 'Watch TV' %}
-          Watching TV
-        {% elif activity == 'PS3' %}
-          Playing PS3
-        {% elif activity == 'Watch Roku' %}
-          Watching Roku
-        {% elif activity == 'PowerOff' %}
-          Powered Off
-        {% else %}
-          Unknown
-        {% endif %}
-      friendly_name: Living Room
-      icon_template: >-
-        {% if is_state('sensor.living_room', 'Watching TV') %}
-          mdi:television-guide
-        {% elif is_state('sensor.living_room', 'Watching Roku') %}
-          mdi:plex
-        {% elif is_state('sensor.living_room', 'Playing PS3') %}
-          mdi:playstation
-        {% elif is_state('sensor.living_room', 'Powered Off') %}
-          mdi:power
-        {% else %}
-          mdi:television
-        {% endif %}
+#- platform: template
+#  sensors:
+#    living_room:
+#      value_template: >-
+#        {% set activity = states.remote.living_room.attributes.current_activity %}
+#        {% if activity == 'Watch TV' %}
+#          Watching TV
+#        {% elif activity == 'PS3' %}
+#          Playing PS3
+#        {% elif activity == 'Watch Roku' %}
+#          Watching Roku
+#        {% elif activity == 'PowerOff' %}
+#          Powered Off
+#        {% else %}
+#          Unknown
+#        {% endif %}
+#      friendly_name: Living Room
+#      icon_template: >-
+#        {% if is_state('sensor.living_room', 'Watching TV') %}
+#          mdi:television-guide
+#        {% elif is_state('sensor.living_room', 'Watching Roku') %}
+#          mdi:plex
+#        {% elif is_state('sensor.living_room', 'Playing PS3') %}
+#          mdi:playstation
+#        {% elif is_state('sensor.living_room', 'Powered Off') %}
+#          mdi:power
+#        {% else %}
+#          mdi:television
+#        {% endif %}

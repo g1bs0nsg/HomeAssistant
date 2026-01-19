@@ -1,58 +1,58 @@
-- platform: template
-  switches:
-    # TV
-    tv:
-      friendly_name: "TV"
-      value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'TV') }}"
-      turn_on:
-        action: remote.turn_on
-        data:
-          entity_id: remote.living_room
-          activity: "TV"
-      turn_off:
-        action: remote.turn_on
-        data:
-          entity_id: remote.living_room
-          activity: "PowerOff"
-    # Smart TV
-    plex:
-      friendly_name: "Plex"
-      value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch Smart TV') }}"
-      turn_on:
-        action: remote.turn_on
-        data:
-          entity_id: remote.living_room
-          activity: "Watch Smart TV"
-      turn_off:
-        action: remote.turn_on
-        data:
-          entity_id: remote.living_room
-          activity: "PowerOff"
-    # PS3
-    ps3:
-      friendly_name: "PS3"
-      value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'PS3') }}"
-      turn_on:
-        action: remote.turn_on
-        data:
-          entity_id: remote.living_room
-          activity: "PS3"
-      turn_off:
-        action: remote.turn_on
-        data:
-          entity_id: remote.living_room
-          activity: "PowerOff"
-    # 3D Printer
-    3d_printer:
-      friendly_name: "3D Printer"
-      value_template: "{{ is_state('switch.3d_printer_power', 'on') }}"
-      turn_on:
-        - action: switch.turn_on
-          entity_id: switch.3d_printer_power
-        - action: switch.turn_on
-          entity_id: switch.3d_printer_lamp
-      turn_off:
-        - action: switch.turn_off
-          entity_id: switch.3d_printer_power
-        - action: switch.turn_off
-          entity_id: switch.3d_printer_lamp
+# - platform: template
+#   switches:
+#     # TV
+#     tv:
+#       friendly_name: "TV"
+#       value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'TV') }}"
+#       turn_on:
+#         action: remote.turn_on
+#         data:
+#           entity_id: remote.living_room
+#           activity: "TV"
+#       turn_off:
+#         action: remote.turn_on
+#         data:
+#           entity_id: remote.living_room
+#           activity: "PowerOff"
+#     # Smart TV
+#     plex:
+#       friendly_name: "Plex"
+#       value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch Smart TV') }}"
+#       turn_on:
+#         action: remote.turn_on
+#         data:
+#           entity_id: remote.living_room
+#           activity: "Watch Smart TV"
+#       turn_off:
+#         action: remote.turn_on
+#         data:
+#           entity_id: remote.living_room
+#           activity: "PowerOff"
+#     # PS3
+#     ps3:
+#       friendly_name: "PS3"
+#       value_template: "{{ is_state_attr('remote.living_room', 'current_activity', 'PS3') }}"
+#       turn_on:
+#         action: remote.turn_on
+#         data:
+#           entity_id: remote.living_room
+#           activity: "PS3"
+#       turn_off:
+#         action: remote.turn_on
+#         data:
+#           entity_id: remote.living_room
+#           activity: "PowerOff"
+#     # 3D Printer
+#     3d_printer:
+#       friendly_name: "3D Printer"
+#       value_template: "{{ is_state('switch.3d_printer_power', 'on') }}"
+#       turn_on:
+#         - action: switch.turn_on
+#           entity_id: switch.3d_printer_power
+#         - action: switch.turn_on
+#           entity_id: switch.3d_printer_lamp
+#       turn_off:
+#         - action: switch.turn_off
+#           entity_id: switch.3d_printer_power
+#         - action: switch.turn_off
+#           entity_id: switch.3d_printer_lamp

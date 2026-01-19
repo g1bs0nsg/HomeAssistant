@@ -15,3 +15,95 @@
       unique_id: forecast_templow
       state: "{{ daily['weather.home'].forecast[0].templow }}"
       unit_of_measurement: °F
+
+- sensor:
+    - default_entity_id: sensor.living_room
+      name: Living Room
+      state:
+        "{% set activity = states.remote.living_room.attributes.current_activity %}
+        {% if activity == 'Watch TV' %}
+        Watching TV
+        {% elif activity == 'PS3' %}
+        Playing PS3
+        {% elif activity == 'Watch Roku' %}
+        Watching Roku
+        {% elif activity == 'PowerOff' %}
+        Powered Off
+        {% else %}
+        Unknown
+        {% endif %}"
+      icon: "{% if is_state('sensor.living_room', 'Watching TV') %}
+        mdi:television-guide
+        {% elif is_state('sensor.living_room', 'Watching Roku') %}
+        mdi:plex
+        {% elif is_state('sensor.living_room', 'Playing PS3') %}
+        mdi:playstation
+        {% elif is_state('sensor.living_room', 'Powered Off') %}
+        mdi:power
+        {% else %}
+        mdi:television
+        {% endif %}"
+
+- switch:
+    - turn_on:
+        - action: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: TV
+      turn_off:
+        - action: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: "PowerOff"
+      default_entity_id: switch.tv
+      name: TV
+      state: "{{ is_state_attr('remote.living_room', 'current_activity', 'TV') }}"
+
+- switch:
+    - turn_on:
+        - action: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: Watch Smart TV
+      turn_off:
+        - action: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: "PowerOff"
+      default_entity_id: switch.plex
+      name: Plex
+      state: "{{ is_state_attr('remote.living_room', 'current_activity', 'Watch Smart TV') }}"
+
+- switch:
+    - turn_on:
+        - action: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: "PS3"
+      turn_off:
+        - action: remote.turn_on
+          data:
+            entity_id: remote.living_room
+            activity: "PowerOff"
+      default_entity_id: switch.ps3
+      name: PS3
+      state: "{{ is_state_attr('remote.living_room', 'current_activity', 'PS3') }}"
+
+- switch:
+    - turn_on:
+        - action: switch.turn_on
+          entity_id:
+            - switch.3d_printer_power
+        - action: switch.turn_on
+          entity_id:
+            - switch.3d_printer_lamp
+      turn_off:
+        - action: switch.turn_off
+          entity_id:
+            - switch.3d_printer_power
+        - action: switch.turn_off
+          entity_id:
+            - switch.3d_printer_lamp
+      default_entity_id: switch.3d_printer
+      name: 3D Printer
+      state: "{{ is_state('switch.3d_printer_power', 'on') }}"
