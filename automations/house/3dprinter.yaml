@@ -36,7 +36,7 @@
 
 - id: 3dprinter_poweroff_idle
   alias: 3D Printer Idle Power Off
-  initial_state: on
+  initial_state: off
   trigger:
     trigger: state
     entity_id: switch.3d_printer
