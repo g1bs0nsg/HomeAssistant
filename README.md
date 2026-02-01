@@ -27,4 +27,4 @@ Server is home to:
 
 # Build Status: ![CI Status](https://github.com/g1bs0nsg/HomeAssistant/actions/workflows/main.yml/badge.svg)
 
-Currently running [Home Assistant](https://home-assistant.io/) version __2025.1.2__
+Currently running [Home Assistant](https://home-assistant.io/) version __2025.1.3__
