@@ -2,10 +2,15 @@
   alias: 3D Print Done
   initial_state: on
   trigger:
-    trigger: state
-    entity_id: binary_sensor.octoprint_printing
-    from: "on"
-    to: "off"
+    device_id: 3343bcbcb690ef2e8734bdc078c8cf16
+    domain: bambu_lab
+    type: event_print_finished
+    trigger: device
+  #trigger:
+  #  trigger: state
+  #  entity_id: binary_sensor.octoprint_printing
+  #  from: "on"
+  #  to: "off"
   action:
     - action: !secret telservice
       data:
@@ -60,10 +65,28 @@
   alias: 3D Printer Error
   initial_state: on
   trigger:
-    trigger: state
-    entity_id: binary_sensor.octoprint_printing_error
-    to: "on"
+    device_id: 3343bcbcb690ef2e8734bdc078c8cf16
+    domain: bambu_lab
+    type: event_print_error
+    trigger: device
+  #trigger:
+  #  trigger: state
+  #  entity_id: binary_sensor.octoprint_printing_error
+  #  to: "on"
   action:
     - action: !secret telservice
       data:
         message: "3D Printer has experienced an error and requires your attention!"
+
+- id: 3dprinter_failed
+  alias: 3D Printer Failed
+  initial_state: on
+  trigger:
+    device_id: 3343bcbcb690ef2e8734bdc078c8cf16
+    domain: bambu_lab
+    type: event_print_failed
+    trigger: device
+  action:
+    - action: !secret telservice
+      data:
+        message: "3D Print has failed!"
