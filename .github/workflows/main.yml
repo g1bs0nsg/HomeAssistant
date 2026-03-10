@@ -46,6 +46,11 @@ jobs:
           git clone https://github.com/wuwentao/midea_ac_lan.git midea_ac_lan
           mv -v ./midea_ac_lan/custom_components/* ./custom_components/
           rm -rf ./midea_ac_lan
+      - name: Clone custom component bambu_lab
+        run: |
+          git clone https://github.com/greghesp/ha-bambulab.git bambu_lab
+          mv -v ./bambu_lab/custom_components/* ./custom_components/
+          rm -rf ./bambu_lab
       - name: Run Home Asisstant Configuration Check
         uses: frenck/action-home-assistant@v1.4.1
         with:
