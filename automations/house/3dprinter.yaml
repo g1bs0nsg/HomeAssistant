@@ -2,7 +2,7 @@
   alias: 3D Print Done
   initial_state: on
   trigger:
-    device_id: 3343bcbcb690ef2e8734bdc078c8cf16
+    device_id: !secret blp2s
     domain: bambu_lab
     type: event_print_finished
     trigger: device
@@ -65,7 +65,7 @@
   alias: 3D Printer Error
   initial_state: on
   trigger:
-    device_id: 3343bcbcb690ef2e8734bdc078c8cf16
+    device_id: !secret blp2s
     domain: bambu_lab
     type: event_print_error
     trigger: device
@@ -82,7 +82,7 @@
   alias: 3D Printer Failed
   initial_state: on
   trigger:
-    device_id: 3343bcbcb690ef2e8734bdc078c8cf16
+    device_id: !secret blp2s
     domain: bambu_lab
     type: event_print_failed
     trigger: device
