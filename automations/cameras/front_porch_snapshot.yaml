@@ -43,7 +43,7 @@
           http://hass.sky.net:8123/api/frigate/notifications/{{ id }}/thumbnail.jpg
         caption: >
           {{ label | title }} detected by {{ camera | replace("_", " ") | title }}
-        target: !secret tchatid1
+        chat_id: !secret tchatid1
     - delay: "00:00:30"
     - action: telegram_bot.send_video
       data:
@@ -51,7 +51,7 @@
           http://hass.sky.net:8123/api/frigate/notifications/{{ id }}/{{ camera }}/clip.mp4
         caption: >
           Video of detection from {{ camera | replace("_", " ") | title }}
-        target: !secret tchatid1
+        chat_id: !secret tchatid1
     - condition: template
       value_template: "{{ not (now() - states.automation.doorbird_ring.attributes.last_triggered).total_seconds() < 60 }}"
     - condition: template

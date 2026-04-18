@@ -29,6 +29,6 @@
           {% if trigger.to_state.attributes.match is defined %}
             {{ trigger.to_state.attributes.match.name | title }} identified by {{trigger.to_state.attributes.camera | replace("_", " ") | title}} @ {{trigger.to_state.attributes.match.confidence}}%, took {{trigger.to_state.attributes.attempts}} attempt(s) @ {{trigger.to_state.attributes.duration}} sec
           {% endif %}
-        target: !secret tchatid1
+        chat_id: !secret tchatid1
   mode: single
   max_exceeded: silent
