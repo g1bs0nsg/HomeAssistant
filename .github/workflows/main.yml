@@ -55,5 +55,4 @@ jobs:
         uses: frenck/action-home-assistant@v1.4.1
         with:
           secrets: fake_secrets.yaml
-          #version: stable
-          version: "2026.7.4"
+          version: stable
