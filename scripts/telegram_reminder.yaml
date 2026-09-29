@@ -1,0 +1,72 @@
+telegram_reminder:
+  alias: Telegram Reminder (repeat until acknowledged)
+  mode: parallel # Allow multiple instances that will not cancel each other
+  max: 10
+  fields:
+    message:
+      description: Text of the reminder
+      example: "Did you put out the trash?"
+    yes_command:
+      description: Callback data for the acknowledge button (must be unique per reminder)
+      example: "/trashoff"
+    later_command:
+      description: Callback data for the snooze button. Leave empty for no snooze button.
+      example: "/trashlater"
+      default: ""
+    ack_yes_message:
+      description: Popup text shown when Yes is pressed
+      default: "Ok, acknowledged."
+    ack_later_message:
+      description: Popup text shown when Remind Later is pressed
+      default: "Ok, I'll remind you again."
+    repeat_interval:
+      description: How long to wait before resending (also the snooze length)
+      default: "00:30:00"
+  sequence:
+    - repeat:
+        until:
+          - condition: template
+            value_template: >-
+              {{ wait.trigger is not none
+                 and wait.trigger.event.data.data == yes_command }}
+        sequence:
+          - action: telegram_bot.send_message
+            data:
+              message: "{{ message }}"
+              inline_keyboard: >-
+                {% if later_command %}
+                Yes:{{ yes_command }}, Remind Me Later:{{ later_command }}
+                {% else %}
+                Yes:{{ yes_command }}
+                {% endif %}
+          - wait_for_trigger:
+              - trigger: event
+                event_type: telegram_callback
+                event_data:
+                  data: "{{ yes_command }}"
+              - trigger: event
+                event_type: telegram_callback
+                event_data:
+                  data: "{{ later_command if later_command else yes_command }}"
+            timeout: "{{ repeat_interval }}"
+            continue_on_timeout: true
+          - if:
+              - condition: template
+                value_template: "{{ wait.trigger is not none }}"
+            then:
+              - action: telegram_bot.answer_callback_query
+                data:
+                  callback_query_id: "{{ wait.trigger.event.data.id }}"
+                  message: >-
+                    {{ ack_yes_message if wait.trigger.event.data.data == yes_command
+                       else ack_later_message }}
+              - action: telegram_bot.edit_replymarkup
+                data:
+                  message_id: "{{ wait.trigger.event.data.message.message_id }}"
+                  chat_id: "{{ wait.trigger.event.data.chat_id }}"
+                  inline_keyboard: []
+              - if:
+                  - condition: template
+                    value_template: "{{ wait.trigger.event.data.data != yes_command }}"
+                then:
+                  - delay: "{{ repeat_interval }}"

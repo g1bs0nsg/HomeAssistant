@@ -10,55 +10,11 @@
     - condition: template
       value_template: "{{ 'Change HVAC Filter' in trigger.calendar_event.summary }}"
   actions:
-    - action: !secret telservice
-      data_template:
-        message: "Have you changed the HVAC filter?"
-        data:
-          inline_keyboard: "Yes:/hvacfilteroff"
-    - action: timer.start
+    - action: script.telegram_reminder
       data:
-        entity_id: timer.hvacfilter
-        duration: "01:00:00"
-  mode: queued
-
-# Handle the telegram response for yes
-- id: hvacfilter_off
-  alias: HVAC Filter Changed
-  initial_state: on
-  trigger:
-    trigger: event
-    event_type: telegram_callback
-    event_data:
-      data: "/hvacfilteroff"
-  actions:
-    - action: telegram_bot.answer_callback_query
-      data_template:
-        callback_query_id: "{{ trigger.event.data.id }}"
-        message: "Ok, HVAC filter channged"
-    - action: telegram_bot.edit_replymarkup
-      data_template:
-        message_id: "{{ trigger.event.data.message.message_id }}"
-        chat_id: "{{ trigger.event.data.chat_id }}"
-        inline_keyboard: []
-    - action: timer.cancel
-      entity_id: timer.hvacfilter
-
-# Fire the notification again if the timer finishes
-- id: hvacfilter_repeat
-  alias: Repeat Change HVAC Filter
-  initial_state: on
-  trigger:
-    trigger: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.hvacfilter
-  actions:
-    - action: !secret telservice
-      data_template:
         message: "Have you changed the HVAC filter?"
-        data:
-          inline_keyboard: "Yes:/hvacfilteroff"
-    - action: timer.start
-      data:
-        entity_id: timer.hvacfilter
-        duration: "01:00:00"
+        yes_command: "/hvacoff"
+        later_command: "/hvaclater"
+        ack_yes_message: "Ok, HVAC filter changed."
+        ack_later_message: "Ok, I'll remind you again in 1 hour."
+        repeat_interval: "01:00:00"
