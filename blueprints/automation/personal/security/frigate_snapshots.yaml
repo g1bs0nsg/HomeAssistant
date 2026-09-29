@@ -1,0 +1,109 @@
+blueprint:
+  name: Frigate Camera Snapshot to Telegram
+  description: >-
+    Sends a Telegram photo + video clip when Frigate reports a new detection
+    entering one of the specified zones, gated by whatever presence/door
+    conditions you supply. Optionally triggers a motion-alert sound script
+    afterward.
+  domain: automation
+  input:
+    frigate_trigger_id:
+      name: Trigger ID
+      description: >-
+        Internal id for this trigger, must be unique per instantiation
+        (e.g. frigate-event-dogcam, frigate-event-doorbird).
+      selector:
+        text:
+    camera_id:
+      name: Frigate Camera Name
+      description: >-
+        The camera name as it appears in the MQTT payload's
+        after.camera field (e.g. dog_cam, front_door, front_porch).
+      selector:
+        text:
+    watched_zones:
+      name: Watched Zones
+      description: >-
+        List of Frigate zone names. A notification is sent if the
+        detection's entered_zones includes any of these.
+      selector:
+        object:
+    presence_conditions:
+      name: Additional Conditions
+      description: >-
+        Extra conditions that must ALL be true before notifying — this is
+        where you plug in your motion_alert/guest/autolock/front_door/
+        presence checks, since those differ per camera.
+      default: []
+      selector:
+        condition:
+    notify_chat_id:
+      name: Telegram Chat ID
+      description: Pass your !secret tchatid1 (or equivalent) here.
+      selector:
+        text:
+    frigate_base_url:
+      name: Frigate/HA Base URL
+      default: ""
+      selector:
+        text:
+    trigger_motion_alert_script:
+      name: Play Motion Alert Sound
+      description: >-
+        If enabled, runs script.motion_alert after sending the notification.
+      default: false
+      selector:
+        boolean:
+
+mode: single
+max_exceeded: silent
+
+variables:
+  watched_zones: !input watched_zones
+  frigate_base_url: !input frigate_base_url
+  trigger_motion_alert_script: !input trigger_motion_alert_script
+
+trigger:
+  - trigger: mqtt
+    topic: frigate/events
+    id: !input frigate_trigger_id
+    payload: !input camera_id
+    value_template: '{{ value_json["after"]["camera"] }}'
+    variables:
+      after_zones: '{{ trigger.payload_json["after"]["entered_zones"] }}'
+      before_zones: '{{ trigger.payload_json["before"]["entered_zones"] }}'
+      camera: '{{ trigger.payload_json["after"]["camera"] }}'
+      id: '{{ trigger.payload_json["after"]["id"] }}'
+      label: '{{ trigger.payload_json["after"]["label"] }}'
+
+condition:
+  - condition: or
+    conditions:
+      - condition: template
+        value_template: "{{ trigger.payload_json['type'] == 'new' }}"
+      - condition: template
+        value_template: "{{ before_zones | length == 0 }}"
+  - condition: and
+    conditions: !input presence_conditions
+  - condition: template
+    value_template: >-
+      {{ watched_zones | select('in', trigger.payload_json["after"]["entered_zones"]) | list | length > 0 }}
+
+action:
+  - action: telegram_bot.send_photo
+    data:
+      url: "{{ frigate_base_url }}/api/frigate/notifications/{{ id }}/thumbnail.jpg"
+      caption: "{{ label | title }} detected by {{ camera | replace('_', ' ') | title }}"
+      chat_id: !input notify_chat_id
+  - delay: "00:00:30"
+  - action: telegram_bot.send_video
+    data:
+      url: "{{ frigate_base_url }}/api/frigate/notifications/{{ id }}/{{ camera }}/clip.mp4"
+      caption: "Video of detection from {{ camera | replace('_', ' ') | title }}"
+      chat_id: !input notify_chat_id
+  - if:
+      - condition: template
+        value_template: "{{ trigger_motion_alert_script }}"
+    then:
+      - action: script.turn_on
+        entity_id: script.motion_alert
