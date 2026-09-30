@@ -54,6 +54,13 @@ blueprint:
       default: false
       selector:
         boolean:
+    sound_file:
+      name: Sound File for the Motion Alert script to play
+      description: >-
+        mp3 file located in www/mp3 that the script will play when triggered
+      default: false
+      selector:
+        text:
 
 mode: single
 max_exceeded: silent
@@ -106,4 +113,6 @@ action:
         value_template: "{{ trigger_motion_alert_script }}"
     then:
       - action: script.turn_on
-        entity_id: script.motion_alert
+        data:
+          entity_id: script.play_alert_sound
+          sound_file: !input sound_file

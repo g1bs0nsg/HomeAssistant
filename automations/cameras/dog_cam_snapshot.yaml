@@ -9,6 +9,7 @@
       watched_zones: ["dcperson", "fpoverhead"]
       notify_chat_id: !secret tchatid1
       frigate_base_url: !secret ha_base_url
+      sound_file: "motion_alert.mp3"
       presence_conditions:
         - condition: state
           entity_id: input_boolean.motion_alert
