@@ -7,7 +7,7 @@
     from: "off"
     to: "on"
   action:
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "Basement dehumidifier tank is full!"
 
@@ -19,6 +19,6 @@
     entity_id: sensor.151732606083492_tank
     above: 50
   action:
-    - service: !secret telservice
+    - action: !secret telservice
       data:
         message: "Time to empty the basement dehumidifier tank!"
