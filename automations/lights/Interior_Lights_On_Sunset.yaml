@@ -1,5 +1,5 @@
-# Turn on kitchen light at sunset
-# and transition up to 50% brightness over 15 minutes
+# Turn on the living room lights at sunset
+# in nightlight mode
 
 - id: Interior_Lights_On_Sunset
   alias: Interior Lights On - Sunset
@@ -25,6 +25,7 @@
         state: "off"
   action:
     action: light.turn_on
-    data:
+    target:
       entity_id: light.livingroom_lights
-      brightness_pct: 1
+    data:
+      effect: Night light
