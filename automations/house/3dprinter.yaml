@@ -6,60 +6,10 @@
     domain: bambu_lab
     type: event_print_finished
     trigger: device
-  #trigger:
-  #  trigger: state
-  #  entity_id: binary_sensor.octoprint_printing
-  #  from: "on"
-  #  to: "off"
   action:
     - action: !secret telservice
       data:
         message: "3D Print Complete!"
-
-- id: 3dprinter_poweroff_after_print
-  alias: 3D Printer Power Off After Print Finishes
-  initial_state: on
-  trigger:
-    trigger: state
-    entity_id: binary_sensor.octoprint_printing
-    from: "on"
-    to: "off"
-    for:
-      minutes: 20
-  condition:
-    condition: numeric_state
-    entity_id:
-      - sensor.octoprint_actual_bed_temp
-      - sensor.octoprint_actual_tool0_temp
-    below: 60
-  actions:
-    - action: switch.turn_off
-      entity_id: switch.3d_printer
-    - action: !secret telservice
-      data:
-        message: "3D Printer has been idle for 20 minutes and is completely cooled down, powering off!"
-
-- id: 3dprinter_poweroff_idle
-  alias: 3D Printer Idle Power Off
-  initial_state: off
-  trigger:
-    trigger: state
-    entity_id: switch.3d_printer
-    to: "on"
-    for:
-      minutes: 30
-  condition:
-    condition: not
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.octoprint_printing
-        state: "on"
-  actions:
-    - action: switch.turn_off
-      entity_id: switch.3d_printer
-    - action: !secret telservice
-      data:
-        message: "3D Printer has been idle for 30 minutes, shutting down!"
 
 - id: 3dprinter_error
   alias: 3D Printer Error
@@ -69,10 +19,6 @@
     domain: bambu_lab
     type: event_print_error
     trigger: device
-  #trigger:
-  #  trigger: state
-  #  entity_id: binary_sensor.octoprint_printing_error
-  #  to: "on"
   action:
     - action: !secret telservice
       data:
