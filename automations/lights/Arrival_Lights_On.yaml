@@ -16,39 +16,11 @@
   actions:
     - action: light.turn_on
       entity_id:
-        - light.front_entry
         - light.livingroom_lights
-        - light.diningroom
       data:
         brightness_pct: 100
     - delay: "00:05:00"
-    - action: light.turn_off
-      entity_id:
-        - light.front_entry
-        - light.diningroom
     - action: light.turn_on
       entity_id: light.livingroom_lights
       data:
         brightness_pct: 10
-#- id: Arrival_Exterior_Lights_On
-#  initial_state: on
-#  alias: Exterior Lights On - Arriving Home
-#  trigger:
-#    trigger: state
-#    entity_id:
-#      - !secret personentity1
-#      - !secret personentity2
-#    from: 'not_home'
-#    to: 'home'
-#  condition:
-#    condition: state
-#    entity_id: sun.sun
-#    state: 'below_horizon'
-#  actions:
-#    - action: light.turn_on
-#      entity_id:
-#        - light.front_flood_lights
-#        - light.front_porch_light
-#    - delay: '00:10:00'
-#    - action: light.turn_off
-#      entity_id: light.front_flood_lights
