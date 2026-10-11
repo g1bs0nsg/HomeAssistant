@@ -10,7 +10,7 @@ Whitebox server with AMD FX-8300 8 core Processor, 32 GB of RAM, 4 TB Raid Array
 
 Server is running [Proxmox VE](https://www.proxmox.com/en/proxmox-ve) Hypervisor
 
-All services are containers running [Debian](https://www.debian.org/) 12 linux.
+All services are containers running [Debian](https://www.debian.org/) 13 linux.
 
 Server is home to:
 
@@ -27,4 +27,4 @@ Server is home to:
 
 # Build Status: ![CI Status](https://github.com/g1bs0nsg/HomeAssistant/actions/workflows/main.yml/badge.svg)
 
-Currently running [Home Assistant](https://home-assistant.io/) version __2026.9.4__
+Currently running [Home Assistant](https://home-assistant.io/) version __2026.10.1__
