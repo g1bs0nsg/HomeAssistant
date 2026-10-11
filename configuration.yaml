@@ -117,10 +117,6 @@ ifttt:
 timer:
   dehydrator:
   front_door_battery:
-  trash:
-  dogs:
-  medicine:
-  hvacfilter:
 
 # Input Selects
 input_select:
