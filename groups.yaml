@@ -3,12 +3,6 @@ default_view:
   #  view: yes
   icon: mdi:home
   entities:
-    - alarm_control_panel.home
-    - sensor.weather_cloudiness
-    - sensor.weather_dewpoint_temperature
-    - sensor.weather_humidity
-    - sensor.weather_temperature
-    - sensor.weather_wind_speed
     - climate.hallway
     - group.presence
 
@@ -27,7 +21,6 @@ controls_view:
     - group.mastercontrols
     - group.interior_switches
     - group.exterior_switches
-    - group.dehydrator
     - group.nest
 
 alarm_view:
@@ -36,9 +29,6 @@ alarm_view:
   icon: mdi:lock
   entities:
     - group.locks
-    - group.doors
-    - group.windows
-    - group.motion
 
 livingroom_view:
   name: Living Room
@@ -55,42 +45,26 @@ mastercontrols:
 cameras:
   name: cameras
   entities:
-    - camera.front_porch
-    - camera.back_porch
+    - camera.murdok_cam
     - camera.dog_cam
 
 interior_switches:
-  name: Interior Lights 
+  name: Interior Lights
   entities:
-    - light.front_entry
-    - light.front_door_entry
-    - light.back_entry
-    - light.hallway
-    - light.kitchen
-    - light.garage
+    - light.livingroom_lights
 
 exterior_switches:
   name: Exterior Lights
   entities:
-    - light.front_porch_light
-    - light.front_flood_lights
-    - light.back_porch_light
-    - light.back_flood_lights
-
-dehydrator:
-  name: Dehydrator
-  entities:
-    - switch.dehydrator
-    - timer.dehydrator
+    - switch.back_flood
 
 livingroom:
   name: Living Room
   entities:
-    - sensor.living_room
     - input_select.living_room_tv
     - script.volumeup
     - script.volumedown
-    - light.kitchen
+    - light.livingroom_lights
     - media_player.plex_living_room
     - media_player.googlehome_living_room
 
@@ -104,49 +78,14 @@ nest:
   name: Nest Thermostat
   entities:
     - climate.hallway
-    - sensor.hallway_thermostat_humidity
-    - sensor.hallway_thermostat_hvac_state
-    - sensor.hallway_thermostat_operation_mode
-    - binary_sensor.hallway_thermostat_fan
-    - binary_sensor.hallway_thermostat_has_leaf
-    - binary_sensor.hallway_thermostat_online
+    - sensor.hallway_humidity
 
 locks:
   name: Locks
   entities:
     - input_boolean.autolock
-    - lock.front_door
-    - sensor.front_door_battery_level
-
-doors:
-  name: Doors
-  #  control: hidden
-  entities:
-    - binary_sensor.front_door
-    - binary_sensor.back_door
-    - binary_sensor.garage_door
-
-motion:
-  #  control: hidden
-  name: Motion
-  entities:
-    - binary_sensor.living_room_motion
-    
-windows:
-  name: Windows
-  #  control: hidden
-  entities:
-    - binary_sensor.study_window_1
-    - binary_sensor.study_window_2
-    - binary_sensor.dining_room_window_1
-    - binary_sensor.dining_room_window_2
-    - binary_sensor.dining_room_window_3
-    - binary_sensor.back_door_window
-    - binary_sensor.work_room_window
-    - binary_sensor.guest_room_window
-    - binary_sensor.master_bedroom_window_1
-    - binary_sensor.master_bedroom_window_2
-    - binary_sensor.master_bathroom_window
+    - lock.front_door_lock
+    - lock.basement_door_lock
 
 all_googlehomes:
   name: All Google Homes
