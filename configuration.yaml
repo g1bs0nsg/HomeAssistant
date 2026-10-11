@@ -115,8 +115,6 @@ ifttt:
 
 # Timers
 timer:
-  dehydrator:
-  front_door_battery:
 
 # Input Selects
 input_select:
