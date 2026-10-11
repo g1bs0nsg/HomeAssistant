@@ -15,4 +15,3 @@
       data:
         entity_id:
           - light.front_porch_light
-          - light.back_porch_light
